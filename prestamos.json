@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1753875760406,
+    "fechaPrestamo": "2025-07-30",
+    "nombreEmpresa": "fabru",
+    "monto": 1000000,
+    "plazoMeses": 4,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-11-30",
+    "interesTotal": 200000,
+    "montoTotal": 1200000,
+    "cuotaMensual": 300000,
+    "observaciones": "Prueba",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-30T11:42:40.406Z"
+  }
+]
