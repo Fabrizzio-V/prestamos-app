@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1753876516726,
+    "fechaPrestamo": "2025-07-06",
+    "nombreEmpresa": "Virilo Rolon",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-06",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-30T11:55:16.726Z"
+  }
+]
