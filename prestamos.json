@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1753875982226,
+    "fechaPrestamo": "2025-07-30",
+    "nombreEmpresa": "Prueba",
+    "monto": 100000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-30",
+    "interesTotal": 20000,
+    "montoTotal": 120000,
+    "cuotaMensual": 60000,
+    "observaciones": "Prueba cel",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-30T11:46:22.226Z"
+  }
+]
