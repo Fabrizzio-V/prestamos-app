@@ -1,5 +1,21 @@
 [
   {
+    "id": 1753907420426,
+    "fechaPrestamo": "2025-07-30",
+    "nombreEmpresa": "Francisco cabral",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-30",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "Igual se le debita el 5 de agosto",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-30T20:30:20.426Z"
+  },
+  {
     "id": 1753876516726,
     "fechaPrestamo": "2025-07-06",
     "nombreEmpresa": "Virilo Rolon",
@@ -16,9 +32,9 @@
     "fechaCreacion": "2025-07-30T11:55:16.726Z"
   },
   {
-    "id": 1753907420426,
+    "id": 1753907441296,
     "fechaPrestamo": "2025-07-30",
-    "nombreEmpresa": "Francisco cabral",
+    "nombreEmpresa": "Carlos centurión ",
     "monto": 500000,
     "plazoMeses": 2,
     "tasaInteres": 20,
@@ -27,8 +43,8 @@
     "interesTotal": 100000,
     "montoTotal": 600000,
     "cuotaMensual": 300000,
-    "observaciones": "Igual se le debita el 5 de agosto",
+    "observaciones": "Igual se le debita el 5 de agosto ",
     "estado": "activo",
-    "fechaCreacion": "2025-07-30T20:30:20.426Z"
+    "fechaCreacion": "2025-07-30T20:30:41.296Z"
   }
 ]
