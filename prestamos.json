@@ -12,7 +12,8 @@
     "montoTotal": 1200000,
     "cuotaMensual": 300000,
     "observaciones": "Prueba",
-    "estado": "activo",
-    "fechaCreacion": "2025-07-30T11:42:40.406Z"
+    "estado": "pagado",
+    "fechaCreacion": "2025-07-30T11:42:40.406Z",
+    "fechaPago": "2025-07-30"
   }
 ]
