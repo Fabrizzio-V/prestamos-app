@@ -391,5 +391,38 @@
         "fechaPago": null
       }
     ]
+  },
+  {
+    "id": 1753987505083,
+    "numeroPrestamo": 12,
+    "fechaPrestamo": "2025-06-17",
+    "nombreEmpresa": "Luciano Chaparro",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-08-17",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T18:45:05.083Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-07-17",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-08-17",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
   }
 ]
