@@ -12,7 +12,7 @@
     "montoTotal": 600000,
     "cuotaMensual": 300000,
     "observaciones": "",
-    "estado": "pagado",
+    "estado": "activo",
     "fechaCreacion": "2025-07-30T11:55:16.726Z",
     "numeroPrestamo": 4,
     "cuotas": [
@@ -27,11 +27,11 @@
         "numero": 2,
         "fechaVencimiento": "2025-09-06",
         "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
+        "estado": "pendiente",
+        "fechaPago": null
       }
     ],
-    "fechaPago": "2025-07-31"
+    "fechaPago": null
   },
   {
     "id": 1753907420426,
