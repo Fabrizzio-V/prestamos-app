@@ -1,5 +1,21 @@
 [
   {
+    "id": 1753907441296,
+    "fechaPrestamo": "2025-07-30",
+    "nombreEmpresa": "Carlos centuriÃ³n ",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-30",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "Igual se le debita el 5 de agosto ",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-30T20:30:41.296Z"
+  },
+  {
     "id": 1753907420426,
     "fechaPrestamo": "2025-07-30",
     "nombreEmpresa": "Francisco cabral",
@@ -32,19 +48,19 @@
     "fechaCreacion": "2025-07-30T11:55:16.726Z"
   },
   {
-    "id": 1753907441296,
-    "fechaPrestamo": "2025-07-30",
-    "nombreEmpresa": "Carlos centurión ",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
+    "id": 1753967556811,
+    "fechaPrestamo": "2025-07-07",
+    "nombreEmpresa": "Garcete",
+    "monto": 900000,
+    "plazoMeses": 3,
+    "tasaInteres": 0,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-30",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
+    "fechaVencimiento": "2025-10-07",
+    "interesTotal": 0,
+    "montoTotal": 900000,
     "cuotaMensual": 300000,
-    "observaciones": "Igual se le debita el 5 de agosto ",
+    "observaciones": "Tenia un saldo de 300 en junio y en julio solicito 500 mas",
     "estado": "activo",
-    "fechaCreacion": "2025-07-30T20:30:41.296Z"
+    "fechaCreacion": "2025-07-31T13:12:36.811Z"
   }
 ]
