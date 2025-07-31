@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💰 Sistema de Gestión de Préstamos</title>
+    <title>💰 Sistema de Gestión de Préstamos v2.0</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -43,6 +43,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .version-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 10px;
         }
 
         .connection-status {
@@ -108,6 +119,8 @@
         .stat-number.interes { color: #10b981; }
         .stat-number.vencidos { color: #ef4444; }
         .stat-number.activos { color: #f59e0b; }
+        .stat-number.clientes { color: #8b5cf6; }
+        .stat-number.total-prestamos { color: #06b6d4; }
 
         .main-grid {
             display: grid;
@@ -217,78 +230,6 @@
 
         .info-item:last-child { border-bottom: none; }
 
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            cursor: pointer;
-            position: relative;
-            background: white;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .calendar-day:hover {
-            background: #f8fafc;
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .calendar-day.other-month {
-            color: #ccc;
-            background: #f9f9f9;
-        }
-
-        .calendar-day.today {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-color: #667eea;
-        }
-
-        .calendar-day.has-vencimiento {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        .calendar-day.has-multiple {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-
-        .day-label {
-            font-weight: bold;
-            text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border-radius: 10px;
-            color: #475569;
-        }
-
         .prestamos-table {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -301,7 +242,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px;
+            min-width: 1000px;
         }
 
         th, td {
@@ -331,17 +272,89 @@
         .status-vencido { background: #fee2e2; color: #991b1b; }
         .status-pagado { background: #e0f2fe; color: #0c4a6e; }
 
-        .dias-restantes { font-weight: bold; }
-        .dias-restantes.critico { color: #ef4444; animation: blink 1s infinite; }
-        .dias-restantes.advertencia { color: #f59e0b; }
-        .dias-restantes.normal { color: #10b981; }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.5; }
+        .numero-prestamo {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
         }
 
-        .actions { display: flex; gap: 8px; }
+        .cuotas-info {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .cuotas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .cuota-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cuota-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .cuota-item.pagada {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .cuota-item.vencida {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .cuota-item.actual {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-color: #f59e0b;
+            color: #92400e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        .cliente-info {
+            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .cliente-contador {
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .actions { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn-small { padding: 8px 12px; font-size: 12px; border-radius: 6px; }
 
         .notification {
@@ -382,7 +395,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            max-width: 700px;
+            max-width: 800px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -399,33 +412,6 @@
         }
 
         .close:hover { color: #333; }
-
-        .vencimientos-hoy {
-            background: linear-gradient(135deg, #fef3c7, #fed7aa);
-            border: 2px solid #f59e0b;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .vencimientos-hoy h3 {
-            color: #92400e;
-            margin-bottom: 15px;
-        }
-
-        .vencimiento-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .hidden { display: none !important; }
 
@@ -445,12 +431,40 @@
             100% { transform: rotate(360deg); }
         }
 
-        .github-setup {
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            border: 2px solid #9ca3af;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #10b981, #059669);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .resumen-cuotas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .resumen-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .setup-step {
@@ -461,20 +475,12 @@
             border-left: 4px solid #10b981;
         }
 
-        .setup-step h4 {
-            color: #065f46;
-            margin-bottom: 10px;
-        }
-
-        .code-block {
-            background: #1f2937;
-            color: #f9fafb;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            overflow-x: auto;
-            margin: 10px 0;
+        .github-setup {
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            border: 2px solid #9ca3af;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
         .form-section {
@@ -495,13 +501,24 @@
             display: inline-block;
             margin-bottom: 10px;
         }
+
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>💰 Sistema de Gestión de Préstamos</h1>
-            <p>Control total de tus inversiones y préstamos empresariales</p>
+            <h1>💰 Sistema de Gestión de Préstamos <span class="version-badge">v2.0</span></h1>
+            <p>Control total con numeración automática y tracking de cuotas</p>
             <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
                 Usuario: <span id="currentUser" style="font-weight: bold;">Administrador</span>
             </div>
@@ -538,21 +555,12 @@
             </div>
             
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
-                <button onclick="conectarGitHub()" id="connectBtn">
-                    🔗 Conectar con GitHub
-                </button>
-                <button onclick="mostrarInstrucciones()" class="btn-success">
-                    📋 Ver Instrucciones Completas
-                </button>
-                <button onclick="trabajarOffline()" class="btn-warning">
-                    💻 Trabajar Sin Conexión (Local)
-                </button>
-                <button onclick="verificarConfiguracion()" class="btn-small">
-                    🔍 Verificar Configuración
-                </button>
+                <button onclick="conectarGitHub()" id="connectBtn">🔗 Conectar con GitHub</button>
+                <button onclick="mostrarInstrucciones()" class="btn-success">📋 Ver Instrucciones</button>
+                <button onclick="trabajarOffline()" class="btn-warning">💻 Trabajar Sin Conexión</button>
+                <button onclick="verificarConfiguracion()" class="btn-small">🔍 Verificar</button>
             </div>
 
-            <!-- Vista previa de URLs -->
             <div id="urlPreview" class="github-setup" style="display: none;">
                 <h4>🔗 URLs de tu aplicación:</h4>
                 <div style="margin: 10px 0;">
@@ -580,12 +588,18 @@
                     <div>Préstamos Activos</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number vencidos" id="prestamosVencidos">0</div>
-                    <div>Vencidos Hoy</div>
+                    <div class="stat-number total-prestamos" id="totalPrestamos">0</div>
+                    <div>Total Préstamos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number clientes" id="totalClientes">0</div>
+                    <div>Clientes Únicos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number vencidos" id="cuotasVencidas">0</div>
+                    <div>Cuotas Vencidas</div>
                 </div>
             </div>
-
-            <div id="vencimientosHoy"></div>
 
             <div class="main-grid">
                 <div class="card">
@@ -631,12 +645,12 @@
                             <h4>📊 Información Calculada</h4>
                             <div class="info-grid">
                                 <div class="info-item">
-                                    <span>Fecha de Vencimiento:</span>
-                                    <strong id="fechaVencimiento">-</strong>
+                                    <span>Número de Préstamo:</span>
+                                    <strong id="numeroPrestamo">-</strong>
                                 </div>
                                 <div class="info-item">
-                                    <span>Días del Préstamo:</span>
-                                    <strong id="diasPrestamo">-</strong>
+                                    <span>Fecha de Vencimiento:</span>
+                                    <strong id="fechaVencimiento">-</strong>
                                 </div>
                                 <div class="info-item">
                                     <span>Interés Total:</span>
@@ -650,6 +664,10 @@
                                     <span>Cuota por Mes:</span>
                                     <strong id="cuotaMensual" style="color: #10b981;">₲ 0</strong>
                                 </div>
+                                <div class="info-item">
+                                    <span>Total de Cuotas:</span>
+                                    <strong id="totalCuotas">0</strong>
+                                </div>
                             </div>
                         </div>
                         
@@ -660,17 +678,9 @@
                 </div>
 
                 <div class="card">
-                    <h2>📅 Calendario de Vencimientos</h2>
-                    <div class="calendar-header">
-                        <button class="btn-small" onclick="previousMonth()">◀</button>
-                        <h3 id="currentMonth"></h3>
-                        <button class="btn-small" onclick="nextMonth()">▶</button>
-                    </div>
-                    <div class="calendar" id="calendar"></div>
-                    <div style="margin-top: 15px; font-size: 12px; color: #666;">
-                        <span style="color: #ef4444;">● Vencimientos</span> |
-                        <span style="color: #f59e0b;">● Múltiples</span> |
-                        <span style="color: #667eea;">● Hoy</span>
+                    <h2>📊 Resumen por Cliente</h2>
+                    <div id="resumenClientes" style="max-height: 400px; overflow-y: auto;">
+                        <!-- Se llena dinámicamente -->
                     </div>
                 </div>
             </div>
@@ -679,29 +689,25 @@
                 <h2>📊 Lista de Préstamos</h2>
                 
                 <div style="margin: 20px 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre, monto o fecha..." 
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre, número o fecha..." 
                            style="width: 300px;" onkeyup="filtrarTabla()">
                     <button onclick="filtrarPor('todos')" class="btn-small">Todos</button>
                     <button onclick="filtrarPor('activos')" class="btn-small btn-success">Activos</button>
-                    <button onclick="filtrarPor('vencidos')" class="btn-small btn-danger">Vencidos</button>
+                    <button onclick="filtrarPor('vencidos')" class="btn-small btn-danger">Con Cuotas Vencidas</button>
                     <button onclick="filtrarPor('pagados')" class="btn-small">Pagados</button>
-                    <button onclick="sincronizarDatos()" class="btn-small btn-warning" id="syncBtn">
-                        🔄 Sincronizar
-                    </button>
+                    <button onclick="sincronizarDatos()" class="btn-small btn-warning" id="syncBtn">🔄 Sincronizar</button>
                 </div>
                 
                 <table id="prestamosTable">
                     <thead>
                         <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
                             <th>Fecha</th>
-                            <th>Empresa</th>
                             <th>Monto</th>
                             <th>Plazo</th>
-                            <th>Interés</th>
-                            <th>Cuota Mensual</th>
-                            <th>Vencimiento</th>
-                            <th>Días Rest.</th>
                             <th>Estado</th>
+                            <th>Progreso de Cuotas</th>
                             <th>Total a Recibir</th>
                             <th>Acciones</th>
                         </tr>
@@ -713,33 +719,50 @@
         </div>
     </div>
 
-    <!-- Modal para editar préstamo -->
-    <div id="editModal" class="modal">
+    <!-- Modal para gestionar cuotas -->
+    <div id="cuotasModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="cerrarModal()">&times;</span>
-            <h2>✏️ Editar Préstamo</h2>
-            <form id="editForm">
-                <input type="hidden" id="editId">
-                <div class="form-group">
-                    <label for="editNombreEmpresa">Nombre/Empresa:</label>
-                    <input type="text" id="editNombreEmpresa" required>
+            <span class="close" onclick="cerrarModalCuotas()">&times;</span>
+            <h2 id="modalTitle">💳 Gestión de Cuotas</h2>
+            
+            <div id="infoCliente" class="cliente-info"></div>
+            
+            <div class="resumen-cuotas">
+                <div class="resumen-item">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #10b981;" id="cuotasPagadas">0</div>
+                    <div>Cuotas Pagadas</div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editMonto">Monto (₲):</label>
-                        <input type="number" id="editMonto" step="100000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editPlazoMeses">Plazo (meses):</label>
-                        <input type="number" id="editPlazoMeses" min="1" max="60" required>
-                    </div>
+                <div class="resumen-item">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #f59e0b;" id="cuotasPendientes">0</div>
+                    <div>Cuotas Pendientes</div>
                 </div>
-                <div class="form-group">
-                    <label for="editObservaciones">Observaciones:</label>
-                    <textarea id="editObservaciones"></textarea>
+                <div class="resumen-item">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #ef4444;" id="cuotasVencidasModal">0</div>
+                    <div>Cuotas Vencidas</div>
                 </div>
-                <button type="submit" style="width: 100%;">Guardar Cambios</button>
-            </form>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+            </div>
+
+            <div class="cuotas-info">
+                <h4>📅 Cronograma de Cuotas</h4>
+                <div class="cuotas-grid" id="cuotasGrid">
+                    <!-- Se llena dinámicamente -->
+                </div>
+                <div style="margin-top: 15px; font-size: 12px; color: #666;">
+                    <span style="color: #10b981;">● Pagada</span> |
+                    <span style="color: #f59e0b;">● Actual</span> |
+                    <span style="color: #ef4444;">● Vencida</span> |
+                    <span style="color: #999;">● Pendiente</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                <button onclick="marcarTodasPagadas()" class="btn-success">✅ Marcar Todas como Pagadas</button>
+                <button onclick="reiniciarCuotas()" class="btn-warning">🔄 Reiniciar Cuotas</button>
+            </div>
         </div>
     </div>
 
@@ -747,13 +770,13 @@
     <div id="instructionsModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="cerrarModalInstrucciones()">&times;</span>
-            <h2>📋 Instrucciones Completas - GitHub Pages (100% GRATIS)</h2>
+            <h2>📋 Instrucciones Completas - GitHub Pages</h2>
             <div style="max-height: 500px; overflow-y: auto;">
                 
                 <div class="success-badge">🆓 COMPLETAMENTE GRATUITO PARA SIEMPRE</div>
                 
                 <div class="setup-step">
-                    <h4>🔸 Paso 1: Crear Cuenta en GitHub (si no tienes)</h4>
+                    <h4>🔸 Paso 1: Crear Cuenta en GitHub</h4>
                     <p>1. Ve a <a href="https://github.com" target="_blank">github.com</a></p>
                     <p>2. Registra una cuenta gratuita</p>
                     <p>3. Verifica tu email</p>
@@ -762,7 +785,7 @@
                 <div class="setup-step">
                     <h4>🔸 Paso 2: Crear Repositorio</h4>
                     <p>1. Haz clic en el botón <strong>"+"</strong> → <strong>"New repository"</strong></p>
-                    <p>2. <strong>Nombre:</strong> prestamos-app (o el que prefieras)</p>
+                    <p>2. <strong>Nombre:</strong> prestamos-app-v2 (o el que prefieras)</p>
                     <p>3. ✅ Marcar <strong>"Public"</strong></p>
                     <p>4. ✅ Marcar <strong>"Add a README file"</strong></p>
                     <p>5. Clic en <strong>"Create repository"</strong></p>
@@ -770,72 +793,29 @@
 
                 <div class="setup-step">
                     <h4>🔸 Paso 3: Crear Personal Access Token</h4>
-                    <p>1. Ve a <strong>Settings</strong> (en tu perfil, esquina superior derecha)</p>
-                    <p>2. <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></p>
-                    <p>3. <strong>"Generate new token"</strong> → <strong>"Generate new token (classic)"</strong></p>
-                    <p>4. <strong>Note:</strong> "Prestamos App"</p>
-                    <p>5. <strong>Expiration:</strong> No expiration</p>
-                    <p>6. <strong>Scopes:</strong> ✅ <strong>repo</strong> (marca toda la sección)</p>
-                    <p>7. <strong>"Generate token"</strong></p>
-                    <p>8. <strong>¡IMPORTANTE!</strong> Copia el token inmediatamente (empieza con ghp_)</p>
+                    <p>1. Ve a <strong>Settings</strong> → <strong>Developer settings</strong> → <strong>Personal access tokens</strong></p>
+                    <p>2. <strong>"Generate new token (classic)"</strong></p>
+                    <p>3. <strong>Scopes:</strong> ✅ <strong>repo</strong> (completo)</p>
+                    <p>4. Copia el token (ghp_xxxxx)</p>
                 </div>
 
                 <div class="setup-step">
-                    <h4>🔸 Paso 4: Subir Archivos al Repositorio</h4>
-                    <p>1. En tu repositorio, clic en <strong>"Add file"</strong> → <strong>"Create new file"</strong></p>
-                    <p>2. <strong>Nombre del archivo:</strong> <code>index.html</code></p>
-                    <p>3. Copia y pega todo el código HTML de esta aplicación</p>
-                    <p>4. <strong>Commit:</strong> "Add loan management system"</p>
-                    <p>5. <strong>"Commit new file"</strong></p>
+                    <h4>🔸 Paso 4: Activar GitHub Pages</h4>
+                    <p>1. En tu repositorio: <strong>Settings</strong> → <strong>Pages</strong></p>
+                    <p>2. <strong>Source:</strong> Deploy from a branch</p>
+                    <p>3. <strong>Branch:</strong> main → <strong>Save</strong></p>
                 </div>
 
-                <div class="setup-step">
-                    <h4>🔸 Paso 5: Crear archivo de datos</h4>
-                    <p>1. <strong>"Add file"</strong> → <strong>"Create new file"</strong></p>
-                    <p>2. <strong>Nombre:</strong> <code>prestamos.json</code></p>
-                    <p>3. <strong>Contenido:</strong></p>
-                    <div class="code-block">[]</div>
-                    <p>4. <strong>"Commit new file"</strong></p>
-                </div>
-
-                <div class="setup-step">
-                    <h4>🔸 Paso 6: Activar GitHub Pages</h4>
-                    <p>1. En tu repositorio, ve a <strong>"Settings"</strong></p>
-                    <p>2. En el menú lateral: <strong>"Pages"</strong></p>
-                    <p>3. <strong>Source:</strong> Deploy from a branch</p>
-                    <p>4. <strong>Branch:</strong> main</p>
-                    <p>5. <strong>Folder:</strong> / (root)</p>
-                    <p>6. <strong>"Save"</strong></p>
-                    <p>7. ¡En unos minutos tu app estará en: <code>https://tu-usuario.github.io/prestamos-app/</code></p>
-                </div>
-
-                <div class="setup-step">
-                    <h4>🔸 Paso 7: Configurar la Aplicación</h4>
-                    <p>1. Abre tu aplicación en: <code>https://tu-usuario.github.io/prestamos-app/</code></p>
-                    <p>2. Completa los campos:</p>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Usuario GitHub:</strong> tu-usuario</li>
-                        <li><strong>Repositorio:</strong> prestamos-app</li>
-                        <li><strong>Token:</strong> ghp_xxxxxxxxx</li>
-                    </ul>
-                    <p>3. <strong>"Conectar con GitHub"</strong></p>
-                    <p>4. ¡Listo! 🎉</p>
-                </div>
-
-                <div style="background: #dcfce7; padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #10b981;">
-                    <h4 style="color: #065f46;">✨ Beneficios de esta configuración:</h4>
+                <div style="background: #dcfce7; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #065f46;">✨ Nuevas Funciones v2.0:</h4>
                     <ul style="color: #065f46; margin-left: 20px;">
-                        <li>✅ <strong>100% Gratuito</strong> para siempre</li>
-                        <li>✅ <strong>Acceso desde cualquier dispositivo</strong></li>
-                        <li>✅ <strong>Sincronización automática</strong></li>
-                        <li>✅ <strong>Backup automático</strong> en GitHub</li>
-                        <li>✅ <strong>URL profesional</strong></li>
-                        <li>✅ <strong>Sin límites</strong> de uso</li>
+                        <li>✅ <strong>Numeración automática</strong> de préstamos</li>
+                        <li>✅ <strong>Sistema de cuotas</strong> con tracking individual</li>
+                        <li>✅ <strong>Contadores por cliente</strong></li>
+                        <li>✅ <strong>Progreso visual</strong> de pagos</li>
+                        <li>✅ <strong>Gestión de cuotas vencidas</strong></li>
+                        <li>✅ <strong>Resúmenes mejorados</strong></li>
                     </ul>
-                </div>
-
-                <div style="background: #fef3c7; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #f59e0b;">
-                    <strong>🔒 Seguridad:</strong> Tu token solo se guarda en tu navegador y nunca se comparte. Es completamente seguro.
                 </div>
             </div>
         </div>
@@ -844,10 +824,10 @@
     <script>
         // Variables globales
         let prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
-        let currentDate = new Date();
         let editingId = null;
         let filtroActual = 'todos';
         let isConnected = false;
+        let cuotasModalId = null;
         let githubConfig = {
             username: '',
             repo: '',
@@ -858,13 +838,62 @@
         document.addEventListener('DOMContentLoaded', function() {
             cargarConfiguracion();
             inicializarFormulario();
+            migrarDatos(); // Migrar datos existentes
             actualizarTodo();
-            mostrarVencimientosHoy();
             actualizarPreviewURLs();
         });
 
-        // === FUNCIONES DE GITHUB ===
-        
+        // Migración de datos existentes
+        function migrarDatos() {
+            let datosActualizados = false;
+            prestamos.forEach((prestamo, index) => {
+                // Agregar número de préstamo si no existe
+                if (!prestamo.numeroPrestamo) {
+                    prestamo.numeroPrestamo = index + 1;
+                    datosActualizados = true;
+                }
+                
+                // Agregar sistema de cuotas si no existe
+                if (!prestamo.cuotas && prestamo.modalidadPago === 'cuotas') {
+                    prestamo.cuotas = crearCronogramaCuotas(prestamo);
+                    datosActualizados = true;
+                }
+                
+                // Asegurar que tenga ID único
+                if (!prestamo.id) {
+                    prestamo.id = Date.now() + Math.random();
+                    datosActualizados = true;
+                }
+            });
+            
+            if (datosActualizados) {
+                guardarDatosLocal();
+            }
+        }
+
+        // Crear cronograma de cuotas
+        function crearCronogramaCuotas(prestamo) {
+            const cuotas = [];
+            const fechaInicio = new Date(prestamo.fechaPrestamo);
+            const montoCuota = prestamo.cuotaMensual || (prestamo.montoTotal / prestamo.plazoMeses);
+            
+            for (let i = 0; i < prestamo.plazoMeses; i++) {
+                const fechaVencimiento = new Date(fechaInicio);
+                fechaVencimiento.setMonth(fechaVencimiento.getMonth() + i + 1);
+                
+                cuotas.push({
+                    numero: i + 1,
+                    fechaVencimiento: fechaVencimiento.toISOString().split('T')[0],
+                    monto: montoCuota,
+                    estado: 'pendiente', // pendiente, pagada, vencida
+                    fechaPago: null
+                });
+            }
+            
+            return cuotas;
+        }
+
+        // === FUNCIONES DE GITHUB (mantener las originales) ===
         function cargarConfiguracion() {
             const savedConfig = localStorage.getItem('githubConfig');
             if (savedConfig) {
@@ -874,7 +903,6 @@
                 document.getElementById('githubToken').value = githubConfig.token || '';
                 
                 if (githubConfig.username && githubConfig.repo && githubConfig.token) {
-                    // Auto-conectar si hay configuración completa
                     conectarGitHub();
                 }
             }
@@ -900,7 +928,6 @@
             }
         }
 
-        // Actualizar preview cuando cambien los campos
         document.getElementById('githubUsername').addEventListener('input', actualizarPreviewURLs);
         document.getElementById('githubRepo').addEventListener('input', actualizarPreviewURLs);
 
@@ -970,16 +997,15 @@
                     
                     if (Array.isArray(parsedData)) {
                         prestamos = parsedData;
+                        migrarDatos();
                     }
                 } else if (response.status === 404) {
-                    // Archivo no existe, crear uno vacío
                     await crearArchivoInicialGitHub();
                 } else {
                     throw new Error('Error al cargar datos desde GitHub');
                 }
             } catch (error) {
                 console.error('Error al cargar datos:', error);
-                // Si hay error, usar datos locales como fallback
             }
         }
 
@@ -1010,7 +1036,6 @@
             }
 
             try {
-                // Primero obtener el SHA del archivo actual
                 const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
                     headers: {
                         'Authorization': `token ${githubConfig.token}`,
@@ -1024,7 +1049,6 @@
                     sha = fileData.sha;
                 }
 
-                // Actualizar el archivo
                 const content = btoa(JSON.stringify(prestamos, null, 2));
                 const updateData = {
                     message: `Update prestamos data - ${new Date().toISOString()}`,
@@ -1049,7 +1073,6 @@
                     throw new Error('Error al guardar en GitHub');
                 }
 
-                // También guardar localmente como backup
                 guardarDatosLocal();
                 
             } catch (error) {
@@ -1140,7 +1163,7 @@
             document.getElementById('instructionsModal').style.display = 'none';
         }
 
-        // === FUNCIONES ORIGINALES ADAPTADAS ===
+        // === FUNCIONES PRINCIPALES MEJORADAS ===
 
         function inicializarFormulario() {
             const fechaInput = document.getElementById('fechaPrestamo');
@@ -1156,11 +1179,6 @@
             document.getElementById('prestamoForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 agregarPrestamo();
-            });
-
-            document.getElementById('editForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                actualizarPrestamo();
             });
         }
 
@@ -1178,18 +1196,22 @@
                 const interes = monto * (tasa / 100);
                 const montoTotal = monto + interes;
                 const cuotaMensual = montoTotal / plazo;
-
-                const diasPrestamo = Math.ceil((fechaVencimiento - fechaInicioObj) / (1000 * 60 * 60 * 24));
+                const numeroPrestamo = obtenerSiguienteNumero();
 
                 document.getElementById('calculatedInfo').style.display = 'block';
+                document.getElementById('numeroPrestamo').textContent = '#' + numeroPrestamo;
                 document.getElementById('fechaVencimiento').textContent = formatearFecha(fechaVencimiento);
-                document.getElementById('diasPrestamo').textContent = diasPrestamo + ' días';
                 document.getElementById('interesTotal').textContent = '₲ ' + interes.toLocaleString('es-PY');
                 document.getElementById('montoRecibir').textContent = '₲ ' + montoTotal.toLocaleString('es-PY');
                 document.getElementById('cuotaMensual').textContent = '₲ ' + cuotaMensual.toLocaleString('es-PY');
+                document.getElementById('totalCuotas').textContent = plazo;
             } else {
                 document.getElementById('calculatedInfo').style.display = 'none';
             }
+        }
+
+        function obtenerSiguienteNumero() {
+            return prestamos.length + 1;
         }
 
         async function agregarPrestamo() {
@@ -1211,6 +1233,7 @@
 
             const prestamo = {
                 id: Date.now(),
+                numeroPrestamo: obtenerSiguienteNumero(),
                 fechaPrestamo: fechaPrestamo,
                 nombreEmpresa: nombreEmpresa,
                 monto: monto,
@@ -1226,6 +1249,11 @@
                 fechaCreacion: new Date().toISOString()
             };
 
+            // Crear cronograma de cuotas si es modalidad de cuotas
+            if (modalidad === 'cuotas') {
+                prestamo.cuotas = crearCronogramaCuotas(prestamo);
+            }
+
             prestamos.push(prestamo);
             await guardarDatosGitHub();
             
@@ -1234,14 +1262,14 @@
             document.getElementById('calculatedInfo').style.display = 'none';
             
             actualizarTodo();
-            mostrarVencimientosHoy();
-            mostrarNotificacion(`Préstamo a ${nombreEmpresa} registrado exitosamente`, 'success');
+            mostrarNotificacion(`Préstamo #${prestamo.numeroPrestamo} registrado para ${nombreEmpresa}`, 'success');
         }
 
         function actualizarTodo() {
             actualizarEstadisticas();
+            actualizarCuotasVencidas();
             renderizarTabla();
-            actualizarCalendario();
+            actualizarResumenClientes();
         }
 
         function actualizarEstadisticas() {
@@ -1254,16 +1282,37 @@
                 .reduce((sum, p) => sum + p.interesTotal, 0);
             
             const activos = prestamos.filter(p => p.estado === 'activo').length;
-            
-            const hoy = new Date().toISOString().split('T')[0];
-            const vencidosHoy = prestamos.filter(p => 
-                p.fechaVencimiento === hoy && p.estado === 'activo'
-            ).length;
+            const totalPrestamos = prestamos.length;
+            const clientesUnicos = new Set(prestamos.map(p => p.nombreEmpresa)).size;
 
             document.getElementById('totalPrestado').textContent = '₲ ' + totalPrestado.toLocaleString('es-PY');
             document.getElementById('totalInteres').textContent = '₲ ' + totalInteres.toLocaleString('es-PY');
             document.getElementById('prestamosActivos').textContent = activos;
-            document.getElementById('prestamosVencidos').textContent = vencidosHoy;
+            document.getElementById('totalPrestamos').textContent = totalPrestamos;
+            document.getElementById('totalClientes').textContent = clientesUnicos;
+        }
+
+        function actualizarCuotasVencidas() {
+            const hoy = new Date();
+            let cuotasVencidas = 0;
+
+            prestamos.forEach(prestamo => {
+                if (prestamo.cuotas && prestamo.estado === 'activo') {
+                    prestamo.cuotas.forEach(cuota => {
+                        const fechaVencimiento = new Date(cuota.fechaVencimiento);
+                        if (fechaVencimiento < hoy && cuota.estado === 'pendiente') {
+                            cuota.estado = 'vencida';
+                            cuotasVencidas++;
+                        }
+                    });
+                }
+            });
+
+            document.getElementById('cuotasVencidas').textContent = cuotasVencidas;
+            
+            if (cuotasVencidas > 0) {
+                guardarDatosLocal();
+            }
         }
 
         function renderizarTabla() {
@@ -1275,21 +1324,18 @@
             if (filtroActual === 'activos') {
                 prestamosFiltrados = prestamos.filter(p => p.estado === 'activo');
             } else if (filtroActual === 'vencidos') {
-                const hoy = new Date();
-                prestamosFiltrados = prestamos.filter(p => 
-                    p.estado === 'activo' && new Date(p.fechaVencimiento) <= hoy
-                );
+                prestamosFiltrados = prestamos.filter(p => {
+                    if (!p.cuotas) return false;
+                    return p.cuotas.some(c => c.estado === 'vencida');
+                });
             } else if (filtroActual === 'pagados') {
                 prestamosFiltrados = prestamos.filter(p => p.estado === 'pagado');
             }
 
-            prestamosFiltrados.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+            prestamosFiltrados.sort((a, b) => b.numeroPrestamo - a.numeroPrestamo);
 
             prestamosFiltrados.forEach(prestamo => {
                 const row = tbody.insertRow();
-                const hoy = new Date();
-                const vencimiento = new Date(prestamo.fechaVencimiento);
-                const diasRestantes = Math.ceil((vencimiento - hoy) / (1000 * 60 * 60 * 24));
                 
                 let estadoClass = 'status-activo';
                 let estadoTexto = 'Activo';
@@ -1297,190 +1343,267 @@
                 if (prestamo.estado === 'pagado') {
                     estadoClass = 'status-pagado';
                     estadoTexto = 'Pagado';
-                } else if (diasRestantes < 0) {
-                    estadoClass = 'status-vencido';
-                    estadoTexto = 'Vencido';
                 }
 
-                let diasClass = 'normal';
-                if (diasRestantes <= 0) {
-                    diasClass = 'critico';
-                } else if (diasRestantes <= 7) {
-                    diasClass = 'advertencia';
+                // Calcular progreso de cuotas
+                let progresoCuotas = '';
+                if (prestamo.cuotas) {
+                    const pagadas = prestamo.cuotas.filter(c => c.estado === 'pagada').length;
+                    const total = prestamo.cuotas.length;
+                    const porcentaje = (pagadas / total) * 100;
+                    
+                    progresoCuotas = `
+                        <div class="progress-bar" style="height: 15px;">
+                            <div class="progress-fill" style="width: ${porcentaje}%; font-size: 10px;">
+                                ${pagadas}/${total}
+                            </div>
+                        </div>
+                        <div style="font-size: 11px; text-align: center; margin-top: 5px;">
+                            ${Math.round(porcentaje)}% completado
+                        </div>
+                    `;
+                } else {
+                    progresoCuotas = '<span style="color: #666;">Pago único</span>';
                 }
 
                 row.innerHTML = `
-                    <td>${formatearFecha(prestamo.fechaPrestamo)}</td>
-                    <td>${prestamo.nombreEmpresa}</td>
-                    <td>₲ ${prestamo.monto.toLocaleString('es-PY')}</td>
+                    <td>
+                        <span class="numero-prestamo">#${prestamo.numeroPrestamo}</span>
+                    </td>
+                    <td>
+                        <strong>${prestamo.nombreEmpresa}</strong>
+                        <div style="font-size: 11px; color: #666;">
+                            ${contarPrestamosCliente(prestamo.nombreEmpresa)}
+                        </div>
+                    </td>
+                    <td>
+                        <div>${formatearFecha(prestamo.fechaPrestamo)}</div>
+                        <div style="font-size: 11px; color: #666;">₲ ${prestamo.monto.toLocaleString('es-PY')}</div>
+                    </td>
                     <td>${prestamo.plazoMeses} meses</td>
-                    <td>${prestamo.tasaInteres}% total</td>
-                    <td style="color: #10b981; font-weight: bold;">₲ ${(prestamo.cuotaMensual || 0).toLocaleString('es-PY')}</td>
-                    <td>${formatearFecha(prestamo.fechaVencimiento)}</td>
-                    <td><span class="dias-restantes ${diasClass}">${diasRestantes} días</span></td>
+                    <td>${prestamo.tasaInteres}%</td>
                     <td><span class="status-badge ${estadoClass}">${estadoTexto}</span></td>
-                    <td>₲ ${prestamo.montoTotal.toLocaleString('es-PY')}</td>
+                    <td>${progresoCuotas}</td>
+                    <td style="color: #10b981; font-weight: bold;">₲ ${prestamo.montoTotal.toLocaleString('es-PY')}</td>
                     <td class="actions">
-                        <button class="btn-small btn-success" onclick="marcarPagado(${prestamo.id})">💰</button>
-                        <button class="btn-small btn-warning" onclick="editarPrestamo(${prestamo.id})">✏️</button>
+                        ${prestamo.cuotas ? `<button class="btn-small btn-success" onclick="abrirModalCuotas(${prestamo.id})">📅</button>` : ''}
+                        <button class="btn-small btn-warning" onclick="marcarPagado(${prestamo.id})">✅</button>
                         <button class="btn-small btn-danger" onclick="eliminarPrestamo(${prestamo.id})">🗑️</button>
                     </td>
                 `;
             });
         }
 
-        function actualizarCalendario() {
-            const calendar = document.getElementById('calendar');
-            const monthYear = document.getElementById('currentMonth');
+        function contarPrestamosCliente(nombreCliente) {
+            const prestamosCliente = prestamos.filter(p => p.nombreEmpresa === nombreCliente);
+            const activos = prestamosCliente.filter(p => p.estado === 'activo').length;
+            const total = prestamosCliente.length;
             
-            calendar.innerHTML = '';
-            
-            const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-            days.forEach(day => {
-                const dayLabel = document.createElement('div');
-                dayLabel.className = 'day-label';
-                dayLabel.textContent = day;
-                calendar.appendChild(dayLabel);
-            });
-            
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            monthYear.textContent = new Date(year, month).toLocaleDateString('es-ES', { 
-                month: 'long', 
-                year: 'numeric' 
-            });
-            
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            for (let i = 0; i < firstDay; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.className = 'calendar-day other-month';
-                calendar.appendChild(emptyDay);
-            }
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                dayElement.textContent = day;
-                
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                
-                const today = new Date();
-                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
-                    dayElement.classList.add('today');
-                }
-                
-                const vencimientos = prestamos.filter(p => 
-                    p.fechaVencimiento === dateStr && p.estado === 'activo'
-                );
-                
-                if (vencimientos.length > 0) {
-                    if (vencimientos.length === 1) {
-                        dayElement.classList.add('has-vencimiento');
-                        dayElement.title = `Vence: ${vencimientos[0].nombreEmpresa} - ₲ ${vencimientos[0].montoTotal.toLocaleString('es-PY')}`;
-                    } else {
-                        dayElement.classList.add('has-multiple');
-                        dayElement.title = `${vencimientos.length} préstamos vencen`;
-                    }
-                }
-                
-                dayElement.addEventListener('click', () => mostrarVencimientosFecha(dateStr));
-                calendar.appendChild(dayElement);
-            }
+            return `${activos} activo(s) de ${total} total(es)`;
         }
 
-        function mostrarVencimientosHoy() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const vencimientosHoy = prestamos.filter(p => 
-                p.fechaVencimiento === hoy && p.estado === 'activo'
-            );
+        function actualizarResumenClientes() {
+            const resumenContainer = document.getElementById('resumenClientes');
+            const clientesMap = new Map();
 
-            const container = document.getElementById('vencimientosHoy');
-            
-            if (vencimientosHoy.length > 0) {
-                let html = `
-                    <div class="vencimientos-hoy">
-                        <h3>⚠️ Préstamos que Vencen Hoy (${vencimientosHoy.length})</h3>
-                `;
+            prestamos.forEach(prestamo => {
+                const nombre = prestamo.nombreEmpresa;
+                if (!clientesMap.has(nombre)) {
+                    clientesMap.set(nombre, {
+                        nombre: nombre,
+                        prestamos: [],
+                        totalPrestado: 0,
+                        totalRecibir: 0,
+                        activos: 0
+                    });
+                }
+
+                const cliente = clientesMap.get(nombre);
+                cliente.prestamos.push(prestamo);
+                cliente.totalPrestado += prestamo.monto;
+                cliente.totalRecibir += prestamo.montoTotal;
                 
-                vencimientosHoy.forEach(p => {
+                if (prestamo.estado === 'activo') {
+                    cliente.activos++;
+                }
+            });
+
+            let html = '';
+            Array.from(clientesMap.values())
+                .sort((a, b) => b.totalRecibir - a.totalRecibir)
+                .forEach(cliente => {
+                    const ultimoPrestamo = cliente.prestamos[cliente.prestamos.length - 1];
+                    
                     html += `
-                        <div class="vencimiento-item">
-                            <strong>${p.nombreEmpresa}</strong><br>
-                            <span style="color: #667eea; font-size: 1.1em;">Monto: ₲ ${p.monto.toLocaleString('es-PY')}</span><br>
-                            <span style="color: #10b981; font-weight: bold;">Total a Recibir: ₲ ${p.montoTotal.toLocaleString('es-PY')}</span><br>
-                            <small style="color: #666;">${p.observaciones || 'Sin observaciones'}</small>
+                        <div class="cliente-info">
+                            <div class="cliente-contador">
+                                <strong>${cliente.nombre}</strong>
+                                <span style="float: right;">${cliente.activos} de ${cliente.prestamos.length} activos</span>
+                            </div>
+                            <div style="font-size: 11px; margin-top: 5px;">
+                                Total Prestado: ₲ ${cliente.totalPrestado.toLocaleString('es-PY')}<br>
+                                Total a Recibir: ₲ ${cliente.totalRecibir.toLocaleString('es-PY')}<br>
+                                Último: #${ultimoPrestamo.numeroPrestamo} - ${formatearFecha(ultimoPrestamo.fechaPrestamo)}
+                            </div>
                         </div>
                     `;
                 });
+
+            resumenContainer.innerHTML = html || '<p style="color: #666; text-align: center;">No hay clientes registrados</p>';
+        }
+
+        // === GESTIÓN DE CUOTAS ===
+
+        function abrirModalCuotas(prestamoId) {
+            const prestamo = prestamos.find(p => p.id === prestamoId);
+            if (!prestamo || !prestamo.cuotas) return;
+
+            cuotasModalId = prestamoId;
+            
+            document.getElementById('modalTitle').textContent = `💳 Cuotas - Préstamo #${prestamo.numeroPrestamo}`;
+            
+            document.getElementById('infoCliente').innerHTML = `
+                <strong>Cliente:</strong> ${prestamo.nombreEmpresa}<br>
+                <strong>Monto:</strong> ₲ ${prestamo.monto.toLocaleString('es-PY')} | 
+                <strong>Total:</strong> ₲ ${prestamo.montoTotal.toLocaleString('es-PY')}<br>
+                <strong>Cuota:</strong> ₲ ${prestamo.cuotaMensual.toLocaleString('es-PY')}
+            `;
+
+            actualizarModalCuotas(prestamo);
+            document.getElementById('cuotasModal').style.display = 'flex';
+        }
+
+        function actualizarModalCuotas(prestamo) {
+            const pagadas = prestamo.cuotas.filter(c => c.estado === 'pagada').length;
+            const vencidas = prestamo.cuotas.filter(c => c.estado === 'vencida').length;
+            const pendientes = prestamo.cuotas.filter(c => c.estado === 'pendiente').length;
+            const total = prestamo.cuotas.length;
+            const porcentaje = (pagadas / total) * 100;
+
+            document.getElementById('cuotasPagadas').textContent = pagadas;
+            document.getElementById('cuotasPendientes').textContent = pendientes;
+            document.getElementById('cuotasVencidasModal').textContent = vencidas;
+            document.getElementById('progressFill').style.width = porcentaje + '%';
+            document.getElementById('progressFill').textContent = Math.round(porcentaje) + '%';
+
+            const cuotasGrid = document.getElementById('cuotasGrid');
+            cuotasGrid.innerHTML = '';
+
+            prestamo.cuotas.forEach((cuota, index) => {
+                const cuotaElement = document.createElement('div');
+                cuotaElement.className = `cuota-item ${cuota.estado}`;
+                cuotaElement.innerHTML = `
+                    <div style="font-weight: bold;">${cuota.numero}</div>
+                    <div style="font-size: 10px;">${formatearFecha(cuota.fechaVencimiento)}</div>
+                `;
                 
-                html += '</div>';
-                container.innerHTML = html;
+                cuotaElement.onclick = () => toggleCuota(index);
+                cuotasGrid.appendChild(cuotaElement);
+            });
+        }
+
+        function toggleCuota(index) {
+            const prestamo = prestamos.find(p => p.id === cuotasModalId);
+            if (!prestamo) return;
+
+            const cuota = prestamo.cuotas[index];
+            
+            if (cuota.estado === 'pagada') {
+                cuota.estado = 'pendiente';
+                cuota.fechaPago = null;
             } else {
-                container.innerHTML = '';
+                cuota.estado = 'pagada';
+                cuota.fechaPago = new Date().toISOString().split('T')[0];
+            }
+
+            // Verificar si todas las cuotas están pagadas
+            const todasPagadas = prestamo.cuotas.every(c => c.estado === 'pagada');
+            if (todasPagadas && prestamo.estado === 'activo') {
+                prestamo.estado = 'pagado';
+                prestamo.fechaPago = new Date().toISOString().split('T')[0];
+            } else if (!todasPagadas && prestamo.estado === 'pagado') {
+                prestamo.estado = 'activo';
+                prestamo.fechaPago = null;
+            }
+
+            guardarDatosGitHub();
+            actualizarModalCuotas(prestamo);
+            actualizarTodo();
+        }
+
+        function marcarTodasPagadas() {
+            const prestamo = prestamos.find(p => p.id === cuotasModalId);
+            if (!prestamo) return;
+
+            prestamo.cuotas.forEach(cuota => {
+                cuota.estado = 'pagada';
+                cuota.fechaPago = new Date().toISOString().split('T')[0];
+            });
+
+            prestamo.estado = 'pagado';
+            prestamo.fechaPago = new Date().toISOString().split('T')[0];
+
+            guardarDatosGitHub();
+            actualizarModalCuotas(prestamo);
+            actualizarTodo();
+            mostrarNotificacion('Todas las cuotas marcadas como pagadas', 'success');
+        }
+
+        function reiniciarCuotas() {
+            const prestamo = prestamos.find(p => p.id === cuotasModalId);
+            if (!prestamo) return;
+
+            if (confirm('¿Reiniciar todas las cuotas a pendiente?')) {
+                prestamo.cuotas.forEach(cuota => {
+                    cuota.estado = 'pendiente';
+                    cuota.fechaPago = null;
+                });
+
+                prestamo.estado = 'activo';
+                prestamo.fechaPago = null;
+
+                guardarDatosGitHub();
+                actualizarModalCuotas(prestamo);
+                actualizarTodo();
+                mostrarNotificacion('Cuotas reiniciadas', 'success');
             }
         }
 
-        function mostrarVencimientosFecha(fecha) {
-            const vencimientos = prestamos.filter(p => 
-                p.fechaVencimiento === fecha && p.estado === 'activo'
-            );
-            
-            if (vencimientos.length > 0) {
-                let mensaje = `Vencimientos del ${formatearFecha(fecha)}:\n\n`;
-                vencimientos.forEach(p => {
-                    mensaje += `• ${p.nombreEmpresa}: ₲ ${p.montoTotal.toLocaleString('es-PY')}\n`;
-                });
-                alert(mensaje);
-            }
+        function cerrarModalCuotas() {
+            document.getElementById('cuotasModal').style.display = 'none';
+            cuotasModalId = null;
         }
+
+        // === FUNCIONES MEJORADAS ===
 
         async function marcarPagado(id) {
             const prestamo = prestamos.find(p => p.id === id);
-            if (prestamo && confirm(`¿Marcar como pagado el préstamo de ${prestamo.nombreEmpresa}?`)) {
+            if (prestamo && confirm(`¿Marcar como completamente pagado el préstamo #${prestamo.numeroPrestamo} de ${prestamo.nombreEmpresa}?`)) {
                 prestamo.estado = 'pagado';
                 prestamo.fechaPago = new Date().toISOString().split('T')[0];
-                await guardarDatosGitHub();
-                actualizarTodo();
-                mostrarVencimientosHoy();
-                mostrarNotificacion(`Préstamo de ${prestamo.nombreEmpresa} marcado como pagado`, 'success');
-            }
-        }
-
-        function editarPrestamo(id) {
-            const prestamo = prestamos.find(p => p.id === id);
-            if (prestamo) {
-                editingId = id;
-                document.getElementById('editNombreEmpresa').value = prestamo.nombreEmpresa;
-                document.getElementById('editMonto').value = prestamo.monto;
-                document.getElementById('editPlazoMeses').value = prestamo.plazoMeses;
-                document.getElementById('editObservaciones').value = prestamo.observaciones || '';
-                document.getElementById('editModal').style.display = 'flex';
-            }
-        }
-
-        async function actualizarPrestamo() {
-            const prestamo = prestamos.find(p => p.id === editingId);
-            if (prestamo) {
-                prestamo.nombreEmpresa = document.getElementById('editNombreEmpresa').value;
-                prestamo.observaciones = document.getElementById('editObservaciones').value;
+                
+                // Marcar todas las cuotas como pagadas si existen
+                if (prestamo.cuotas) {
+                    prestamo.cuotas.forEach(cuota => {
+                        cuota.estado = 'pagada';
+                        if (!cuota.fechaPago) {
+                            cuota.fechaPago = new Date().toISOString().split('T')[0];
+                        }
+                    });
+                }
                 
                 await guardarDatosGitHub();
-                cerrarModal();
                 actualizarTodo();
-                mostrarNotificacion('Préstamo actualizado exitosamente', 'success');
+                mostrarNotificacion(`Préstamo #${prestamo.numeroPrestamo} marcado como pagado`, 'success');
             }
         }
 
         async function eliminarPrestamo(id) {
             const prestamo = prestamos.find(p => p.id === id);
-            if (prestamo && confirm(`¿Eliminar el préstamo de ${prestamo.nombreEmpresa}?`)) {
+            if (prestamo && confirm(`¿Eliminar el préstamo #${prestamo.numeroPrestamo} de ${prestamo.nombreEmpresa}?`)) {
                 prestamos = prestamos.filter(p => p.id !== id);
                 await guardarDatosGitHub();
                 actualizarTodo();
-                mostrarVencimientosHoy();
                 mostrarNotificacion('Préstamo eliminado', 'success');
             }
         }
@@ -1504,20 +1627,6 @@
             });
         }
 
-        function previousMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            actualizarCalendario();
-        }
-
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            actualizarCalendario();
-        }
-
-        function cerrarModal() {
-            document.getElementById('editModal').style.display = 'none';
-        }
-
         function formatearFecha(fecha) {
             if (typeof fecha === 'string') {
                 const [year, month, day] = fecha.split('-');
@@ -1538,12 +1647,13 @@
             }, 3000);
         }
 
-        // Cerrar modal al hacer clic fuera
+        // Cerrar modales al hacer clic fuera
         window.onclick = function(event) {
-            const modal = document.getElementById('editModal');
+            const cuotasModal = document.getElementById('cuotasModal');
             const instructionsModal = document.getElementById('instructionsModal');
-            if (event.target === modal) {
-                cerrarModal();
+            
+            if (event.target === cuotasModal) {
+                cerrarModalCuotas();
             }
             if (event.target === instructionsModal) {
                 cerrarModalInstrucciones();
