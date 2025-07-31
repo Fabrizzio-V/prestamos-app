@@ -1,5 +1,53 @@
 [
   {
+    "id": 1753987603196,
+    "numeroPrestamo": 14,
+    "fechaPrestamo": "2025-04-08",
+    "nombreEmpresa": "Jorgelina Zeballos",
+    "monto": 1000000,
+    "plazoMeses": 4,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-08-08",
+    "interesTotal": 200000,
+    "montoTotal": 1200000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T18:46:43.196Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-07-27",
+        "monto": 300000,
+        "estado": "vencida",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-08-27",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2025-09-27",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 4,
+        "fechaVencimiento": "2025-10-27",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ],
+    "fechaModificacion": "2025-07-31T18:47:31.312Z"
+  },
+  {
     "id": 1753987537253,
     "numeroPrestamo": 13,
     "fechaPrestamo": "2025-06-17",
@@ -452,53 +500,6 @@
       {
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ]
-  },
-  {
-    "id": 1753987603196,
-    "numeroPrestamo": 14,
-    "fechaPrestamo": "2025-06-27",
-    "nombreEmpresa": "Jorgelina Zeballos",
-    "monto": 1000000,
-    "plazoMeses": 4,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-27",
-    "interesTotal": 200000,
-    "montoTotal": 1200000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "activo",
-    "fechaCreacion": "2025-07-31T18:46:43.196Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-07-27",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-08-27",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-09-27",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 4,
-        "fechaVencimiento": "2025-10-27",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
