@@ -1403,7 +1403,8 @@
                     </td>
                     <td class="actions">
                         ${prestamo.cuotas ? `<button class="btn-small btn-success" onclick="abrirModalCuotas(${prestamo.id})">📅</button>` : ''}
-                        <button class="btn-small btn-warning" onclick="marcarPagado(${prestamo.id})">✅</button>
+                        <button class="btn-small btn-warning" onclick="editarPrestamo(${prestamo.id})">✏️</button>
+                        <button class="btn-small btn-success" onclick="marcarPagado(${prestamo.id})">✅</button>
                         <button class="btn-small btn-danger" onclick="eliminarPrestamo(${prestamo.id})">🗑️</button>
                     </td>
                 `;
@@ -1669,12 +1670,16 @@
         window.onclick = function(event) {
             const cuotasModal = document.getElementById('cuotasModal');
             const instructionsModal = document.getElementById('instructionsModal');
+            const editModal = document.getElementById('editModal');
             
             if (event.target === cuotasModal) {
                 cerrarModalCuotas();
             }
             if (event.target === instructionsModal) {
                 cerrarModalInstrucciones();
+            }
+            if (event.target === editModal) {
+                cerrarModalEditar();
             }
         }
     </script>
