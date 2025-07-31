@@ -1,5 +1,38 @@
 [
   {
+    "id": 1753987764583,
+    "numeroPrestamo": 15,
+    "fechaPrestamo": "2025-07-02",
+    "nombreEmpresa": "Rosalino Benitez",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-02",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T18:49:24.583Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-08-02",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-09-02",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753987603196,
     "numeroPrestamo": 14,
     "fechaPrestamo": "2025-04-08",
@@ -507,32 +540,46 @@
     ]
   },
   {
-    "id": 1753987764583,
-    "numeroPrestamo": 15,
-    "fechaPrestamo": "2025-07-02",
-    "nombreEmpresa": "Rosalino Benitez",
-    "monto": 500000,
-    "plazoMeses": 2,
+    "id": 1753987844078,
+    "numeroPrestamo": 16,
+    "fechaPrestamo": "2025-04-09",
+    "nombreEmpresa": "Angelino Mendoza",
+    "monto": 1000000,
+    "plazoMeses": 4,
     "tasaInteres": 20,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-02",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
+    "fechaVencimiento": "2025-08-09",
+    "interesTotal": 200000,
+    "montoTotal": 1200000,
     "cuotaMensual": 300000,
     "observaciones": "",
     "estado": "activo",
-    "fechaCreacion": "2025-07-31T18:49:24.583Z",
+    "fechaCreacion": "2025-07-31T18:50:44.078Z",
     "cuotas": [
       {
         "numero": 1,
-        "fechaVencimiento": "2025-08-02",
+        "fechaVencimiento": "2025-05-09",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
       },
       {
         "numero": 2,
-        "fechaVencimiento": "2025-09-02",
+        "fechaVencimiento": "2025-06-09",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2025-07-09",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 4,
+        "fechaVencimiento": "2025-08-09",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
