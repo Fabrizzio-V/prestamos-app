@@ -773,6 +773,83 @@
         </div>
     </div>
 
+    <!-- Modal para editar préstamo -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModalEditar()">&times;</span>
+            <h2>✏️ Editar Préstamo</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                
+                <div class="form-group">
+                    <label for="editFechaPrestamo">Fecha del Préstamo:</label>
+                    <input type="date" id="editFechaPrestamo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editNombreEmpresa">Nombre/Empresa:</label>
+                    <input type="text" id="editNombreEmpresa" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editMonto">Monto (₲):</label>
+                        <input type="number" id="editMonto" step="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPlazoMeses">Plazo (meses):</label>
+                        <input type="number" id="editPlazoMeses" min="1" max="60" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editTasaInteres">Tasa de Interés (% total):</label>
+                        <input type="number" id="editTasaInteres" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editModalidadPago">Modalidad de Pago:</label>
+                        <select id="editModalidadPago">
+                            <option value="cuotas">Cuotas Mensuales</option>
+                            <option value="vencimiento">Al Vencimiento</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editObservaciones">Observaciones:</label>
+                    <textarea id="editObservaciones"></textarea>
+                </div>
+                
+                <div id="editCalculatedInfo" class="calculated-info" style="display: none;">
+                    <h4>📊 Información Recalculada</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span>Fecha de Vencimiento:</span>
+                            <strong id="editFechaVencimiento">-</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Interés Total:</span>
+                            <strong id="editInteresTotal">₲ 0</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Monto Total a Recibir:</span>
+                            <strong id="editMontoRecibir">₲ 0</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Cuota por Mes:</span>
+                            <strong id="editCuotaMensual" style="color: #10b981;">₲ 0</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" style="width: 100%; margin-top: 20px;" class="btn-success">
+                    💾 Guardar Cambios
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal de instrucciones -->
     <div id="instructionsModal" class="modal">
         <div class="modal-content">
@@ -1187,6 +1264,11 @@
                 e.preventDefault();
                 agregarPrestamo();
             });
+
+            document.getElementById('editForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                actualizarPrestamo();
+            });
         }
 
         function calcularPrestamo() {
@@ -1594,6 +1676,119 @@
         }
 
         // === FUNCIONES MEJORADAS ===
+
+        function editarPrestamo(id) {
+            const prestamo = prestamos.find(p => p.id === id);
+            if (prestamo) {
+                editingId = id;
+                
+                // Llenar todos los campos del modal
+                document.getElementById('editId').value = prestamo.id;
+                document.getElementById('editFechaPrestamo').value = prestamo.fechaPrestamo;
+                document.getElementById('editNombreEmpresa').value = prestamo.nombreEmpresa;
+                document.getElementById('editMonto').value = prestamo.monto;
+                document.getElementById('editPlazoMeses').value = prestamo.plazoMeses;
+                document.getElementById('editTasaInteres').value = prestamo.tasaInteres;
+                document.getElementById('editModalidadPago').value = prestamo.modalidadPago;
+                document.getElementById('editObservaciones').value = prestamo.observaciones || '';
+                
+                // Calcular información inicial
+                calcularPrestamoEdicion();
+                
+                // Agregar event listeners para recálculo en tiempo real
+                document.getElementById('editMonto').addEventListener('input', calcularPrestamoEdicion);
+                document.getElementById('editPlazoMeses').addEventListener('input', calcularPrestamoEdicion);
+                document.getElementById('editTasaInteres').addEventListener('input', calcularPrestamoEdicion);
+                document.getElementById('editFechaPrestamo').addEventListener('change', calcularPrestamoEdicion);
+                document.getElementById('editModalidadPago').addEventListener('change', calcularPrestamoEdicion);
+                
+                document.getElementById('editModal').style.display = 'flex';
+            }
+        }
+
+        function calcularPrestamoEdicion() {
+            const monto = parseFloat(document.getElementById('editMonto').value) || 0;
+            const plazo = parseInt(document.getElementById('editPlazoMeses').value) || 0;
+            const tasa = parseFloat(document.getElementById('editTasaInteres').value) || 0;
+            const fechaInicio = document.getElementById('editFechaPrestamo').value;
+
+            if (monto > 0 && plazo > 0 && tasa > 0 && fechaInicio) {
+                const fechaInicioObj = new Date(fechaInicio);
+                const fechaVencimiento = new Date(fechaInicioObj);
+                fechaVencimiento.setMonth(fechaVencimiento.getMonth() + plazo);
+
+                const interes = monto * (tasa / 100);
+                const montoTotal = monto + interes;
+                const cuotaMensual = montoTotal / plazo;
+
+                document.getElementById('editCalculatedInfo').style.display = 'block';
+                document.getElementById('editFechaVencimiento').textContent = formatearFecha(fechaVencimiento);
+                document.getElementById('editInteresTotal').textContent = '₲ ' + interes.toLocaleString('es-PY');
+                document.getElementById('editMontoRecibir').textContent = '₲ ' + montoTotal.toLocaleString('es-PY');
+                document.getElementById('editCuotaMensual').textContent = '₲ ' + cuotaMensual.toLocaleString('es-PY');
+            } else {
+                document.getElementById('editCalculatedInfo').style.display = 'none';
+            }
+        }
+
+        async function actualizarPrestamo() {
+            const prestamo = prestamos.find(p => p.id === editingId);
+            if (prestamo) {
+                // Guardar valores originales para comparar
+                const valoresOriginales = { ...prestamo };
+                
+                // Obtener nuevos valores
+                const fechaPrestamo = document.getElementById('editFechaPrestamo').value;
+                const nombreEmpresa = document.getElementById('editNombreEmpresa').value;
+                const monto = parseFloat(document.getElementById('editMonto').value);
+                const plazo = parseInt(document.getElementById('editPlazoMeses').value);
+                const tasa = parseFloat(document.getElementById('editTasaInteres').value);
+                const modalidad = document.getElementById('editModalidadPago').value;
+                const observaciones = document.getElementById('editObservaciones').value;
+
+                // Recalcular valores
+                const fechaInicioObj = new Date(fechaPrestamo);
+                const fechaVencimiento = new Date(fechaInicioObj);
+                fechaVencimiento.setMonth(fechaVencimiento.getMonth() + plazo);
+
+                const interes = monto * (tasa / 100);
+                const montoTotal = monto + interes;
+                const cuotaMensual = montoTotal / plazo;
+
+                // Actualizar el préstamo
+                prestamo.fechaPrestamo = fechaPrestamo;
+                prestamo.nombreEmpresa = nombreEmpresa;
+                prestamo.monto = monto;
+                prestamo.plazoMeses = plazo;
+                prestamo.tasaInteres = tasa;
+                prestamo.modalidadPago = modalidad;
+                prestamo.fechaVencimiento = fechaVencimiento.toISOString().split('T')[0];
+                prestamo.interesTotal = interes;
+                prestamo.montoTotal = montoTotal;
+                prestamo.cuotaMensual = cuotaMensual;
+                prestamo.observaciones = observaciones;
+                prestamo.fechaModificacion = new Date().toISOString();
+
+                // Si cambió la modalidad de pago, recrear cuotas
+                if (modalidad === 'cuotas' && (!prestamo.cuotas || valoresOriginales.modalidadPago !== 'cuotas')) {
+                    prestamo.cuotas = crearCronogramaCuotas(prestamo);
+                } else if (modalidad === 'vencimiento') {
+                    delete prestamo.cuotas;
+                }
+
+                await guardarDatosGitHub();
+                cerrarModalEditar();
+                actualizarTodo();
+                
+                mostrarNotificacion(`Préstamo #${prestamo.numeroPrestamo} de ${nombreEmpresa} actualizado exitosamente`, 'success');
+            }
+        }
+
+        function cerrarModalEditar() {
+            document.getElementById('editModal').style.display = 'none';
+            document.getElementById('editCalculatedInfo').style.display = 'none';
+            editingId = null;
+        }
 
         async function marcarPagado(id) {
             const prestamo = prestamos.find(p => p.id === id);
