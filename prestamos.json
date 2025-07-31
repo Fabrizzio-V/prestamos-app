@@ -12,7 +12,7 @@
     "interesTotal": 0,
     "montoTotal": 1575000,
     "cuotaMensual": 315000,
-    "observaciones": "Quedo una cuota de 375 en julio y renovo pidiendo un millon (por accidente de su esposa) ahora pagara 4 cuotas de 375 y luego 75 mil aparte en otra cuota (No me dejo colocar en el monto el 75 mil pero en realidad es 1.575.000",
+    "observaciones": "Quedo una cuota de 375 en julio y renovo pidiendo un millon (por accidente de su esposa) ahora pagara 4 cuotas de 375 y luego 75 mil aparte en otra cuota ",
     "estado": "activo",
     "fechaCreacion": "2025-07-31T18:07:32.055Z",
     "cuotas": [
@@ -52,7 +52,7 @@
         "fechaPago": null
       }
     ],
-    "fechaModificacion": "2025-07-31T18:36:03.389Z"
+    "fechaModificacion": "2025-07-31T18:36:15.779Z"
   },
   {
     "id": 1753876516726,
