@@ -565,6 +565,7 @@
                 <button onclick="mostrarInstrucciones()" class="btn-success">📋 Ver Instrucciones</button>
                 <button onclick="trabajarOffline()" class="btn-warning">💻 Trabajar Sin Conexión</button>
                 <button onclick="verificarConfiguracion()" class="btn-small">🔍 Verificar</button>
+                <button onclick="solucionarProblemas()" class="btn-small btn-danger">🔧 Solucionar Problemas</button>
             </div>
 
             <div id="urlPreview" class="github-setup" style="display: none;">
@@ -702,6 +703,7 @@
                     <button onclick="filtrarPor('vencidos')" class="btn-small btn-danger">Con Cuotas Vencidas</button>
                     <button onclick="filtrarPor('pagados')" class="btn-small">Pagados</button>
                     <button onclick="sincronizarDatos()" class="btn-small btn-warning" id="syncBtn">🔄 Sincronizar</button>
+                    <button onclick="forzarGuardadoGitHub()" class="btn-small" id="forceBtn">🔧 Forzar Guardado</button>
                 </div>
                 
                 <table id="prestamosTable">
@@ -1120,22 +1122,45 @@
             }
 
             try {
-                const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-
+                // Primero intentar obtener el SHA del archivo actual
                 let sha = null;
-                if (getResponse.ok) {
-                    const fileData = await getResponse.json();
-                    sha = fileData.sha;
+                let intentos = 0;
+                const maxIntentos = 3;
+
+                while (intentos < maxIntentos) {
+                    try {
+                        const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
+                            headers: {
+                                'Authorization': `token ${githubConfig.token}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        });
+
+                        if (getResponse.ok) {
+                            const fileData = await getResponse.json();
+                            sha = fileData.sha;
+                            break;
+                        } else if (getResponse.status === 404) {
+                            // Archivo no existe, crear uno nuevo
+                            console.log('Archivo no existe, creando uno nuevo...');
+                            break;
+                        } else {
+                            throw new Error(`Error al obtener SHA: ${getResponse.status}`);
+                        }
+                    } catch (error) {
+                        intentos++;
+                        console.log(`Intento ${intentos} fallido para obtener SHA:`, error);
+                        if (intentos >= maxIntentos) throw error;
+                        await esperar(1000); // Esperar 1 segundo antes del siguiente intento
+                    }
                 }
 
+                // Preparar el contenido
                 const content = btoa(JSON.stringify(prestamos, null, 2));
+                const mensaje = `Update prestamos data - ${new Date().toISOString()}`;
+
                 const updateData = {
-                    message: `Update prestamos data - ${new Date().toISOString()}`,
+                    message: mensaje,
                     content: content
                 };
 
@@ -1143,26 +1168,129 @@
                     updateData.sha = sha;
                 }
 
-                const updateResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
+                // Intentar actualizar el archivo
+                intentos = 0;
+                while (intentos < maxIntentos) {
+                    try {
+                        const updateResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${githubConfig.token}`,
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(updateData)
+                        });
+
+                        if (updateResponse.ok) {
+                            console.log('✅ Datos guardados exitosamente en GitHub');
+                            guardarDatosLocal(); // También guardar localmente como backup
+                            return;
+                        } else if (updateResponse.status === 409) {
+                            // Conflicto - el archivo fue modificado, intentar de nuevo
+                            console.log('⚠️ Conflicto detectado, reintentando...');
+                            intentos++;
+                            await esperar(2000); // Esperar 2 segundos
+                            // Volver a obtener el SHA actualizado
+                            continue;
+                        } else {
+                            const errorData = await updateResponse.json().catch(() => ({}));
+                            throw new Error(`Error ${updateResponse.status}: ${errorData.message || updateResponse.statusText}`);
+                        }
+                    } catch (error) {
+                        intentos++;
+                        console.log(`Intento ${intentos} fallido para guardar:`, error);
+                        if (intentos >= maxIntentos) throw error;
+                        await esperar(2000);
+                    }
+                }
+
+            } catch (error) {
+                console.error('❌ Error completo al guardar en GitHub:', error);
+                
+                // Mostrar error específico al usuario
+                let mensajeError = 'Error al guardar en GitHub.';
+                if (error.message.includes('401')) {
+                    mensajeError = 'Token de GitHub inválido o expirado.';
+                } else if (error.message.includes('403')) {
+                    mensajeError = 'Sin permisos para escribir en el repositorio.';
+                } else if (error.message.includes('404')) {
+                    mensajeError = 'Repositorio no encontrado.';
+                } else if (error.message.includes('409')) {
+                    mensajeError = 'Conflicto: archivo modificado externamente.';
+                }
+                
+                mostrarNotificacion(`${mensajeError} Guardado localmente.`, 'error');
+                guardarDatosLocal(); // Siempre guardar localmente como fallback
+            }
+        }
+
+        // Función auxiliar para esperar
+        function esperar(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Función mejorada para recrear el archivo si hay problemas persistentes
+        async function recrearArchivoGitHub() {
+            try {
+                // Primero eliminar el archivo existente si existe
+                try {
+                    const getResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
+                        headers: {
+                            'Authorization': `token ${githubConfig.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    if (getResponse.ok) {
+                        const fileData = await getResponse.json();
+                        
+                        // Eliminar archivo existente
+                        await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `token ${githubConfig.token}`,
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                message: 'Delete old prestamos.json for recreation',
+                                sha: fileData.sha
+                            })
+                        });
+                    }
+                } catch (deleteError) {
+                    console.log('No se pudo eliminar el archivo anterior:', deleteError);
+                }
+
+                // Esperar un momento
+                await esperar(2000);
+
+                // Crear archivo nuevo
+                const content = btoa(JSON.stringify(prestamos, null, 2));
+                const createResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/prestamos.json`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `token ${githubConfig.token}`,
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(updateData)
+                    body: JSON.stringify({
+                        message: 'Recreate prestamos.json file',
+                        content: content
+                    })
                 });
 
-                if (!updateResponse.ok) {
-                    throw new Error('Error al guardar en GitHub');
+                if (createResponse.ok) {
+                    mostrarNotificacion('✅ Archivo recreado exitosamente en GitHub', 'success');
+                    return true;
+                } else {
+                    throw new Error(`Error al recrear: ${createResponse.status}`);
                 }
-
-                guardarDatosLocal();
-                
             } catch (error) {
-                console.error('Error al guardar en GitHub:', error);
-                mostrarNotificacion('Error al guardar en GitHub. Guardado localmente.', 'error');
-                guardarDatosLocal();
+                console.error('Error al recrear archivo:', error);
+                mostrarNotificacion('❌ Error al recrear archivo en GitHub', 'error');
+                return false;
             }
         }
 
@@ -1190,6 +1318,33 @@
             } finally {
                 syncBtn.innerHTML = originalText;
                 syncBtn.disabled = false;
+            }
+        }
+
+        async function forzarGuardadoGitHub() {
+            if (!isConnected) {
+                mostrarNotificacion('No estás conectado a GitHub', 'error');
+                return;
+            }
+
+            const forceBtn = document.getElementById('forceBtn');
+            const originalText = forceBtn.innerHTML;
+            forceBtn.innerHTML = '<span class="loading-spinner"></span>Forzando...';
+            forceBtn.disabled = true;
+
+            try {
+                const success = await recrearArchivoGitHub();
+                if (success) {
+                    mostrarNotificacion('✅ Archivo recreado y guardado exitosamente', 'success');
+                } else {
+                    mostrarNotificacion('❌ Error al forzar guardado', 'error');
+                }
+            } catch (error) {
+                console.error('Error al forzar guardado:', error);
+                mostrarNotificacion('❌ Error al forzar guardado: ' + error.message, 'error');
+            } finally {
+                forceBtn.innerHTML = originalText;
+                forceBtn.disabled = false;
             }
         }
 
@@ -1231,6 +1386,39 @@
             document.getElementById('connectionStatus').className = 'connection-status connected';
             document.getElementById('connectionStatus').textContent = '💻 Modo Local (Sin conexión)';
             mostrarNotificacion('Trabajando en modo local', 'success');
+        }
+
+        function solucionarProblemas() {
+            const problemas = `
+            🔧 SOLUCIONES PARA PROBLEMAS DE GITHUB:
+
+            ❌ "Error al guardar en GitHub":
+            1. Verifica que tu token no haya expirado
+            2. Usa el botón "🔧 Forzar Guardado" en la tabla
+            3. Reconecta con GitHub
+
+            ❌ "Token inválido":
+            1. Genera un nuevo Personal Access Token
+            2. Asegúrate de marcar los permisos "repo"
+            3. Copia el token completo (ghp_xxxxx)
+
+            ❌ "Repositorio no encontrado":
+            1. Verifica el nombre de usuario
+            2. Verifica el nombre del repositorio
+            3. Asegúrate de que el repo sea público
+
+            ❌ "Conflicto 409":
+            1. Usa "🔄 Sincronizar" primero
+            2. Luego "🔧 Forzar Guardado"
+            3. Evita editar desde múltiples dispositivos simultáneamente
+
+            💡 CONSEJOS:
+            • Siempre usa "🔄 Sincronizar" antes de editar
+            • Si persisten errores, usa "🔧 Forzar Guardado"
+            • Los datos SIEMPRE se guardan localmente como backup
+            `;
+            
+            alert(problemas);
         }
 
         function actualizarEstadoConexion(estado, mensaje) {
@@ -1734,53 +1922,70 @@
         async function actualizarPrestamo() {
             const prestamo = prestamos.find(p => p.id === editingId);
             if (prestamo) {
-                // Guardar valores originales para comparar
-                const valoresOriginales = { ...prestamo };
-                
-                // Obtener nuevos valores
-                const fechaPrestamo = document.getElementById('editFechaPrestamo').value;
-                const nombreEmpresa = document.getElementById('editNombreEmpresa').value;
-                const monto = parseFloat(document.getElementById('editMonto').value);
-                const plazo = parseInt(document.getElementById('editPlazoMeses').value);
-                const tasa = parseFloat(document.getElementById('editTasaInteres').value);
-                const modalidad = document.getElementById('editModalidadPago').value;
-                const observaciones = document.getElementById('editObservaciones').value;
+                // Mostrar indicador de carga
+                const submitBtn = document.querySelector('#editForm button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="loading-spinner"></span>Guardando...';
+                submitBtn.disabled = true;
 
-                // Recalcular valores
-                const fechaInicioObj = new Date(fechaPrestamo);
-                const fechaVencimiento = new Date(fechaInicioObj);
-                fechaVencimiento.setMonth(fechaVencimiento.getMonth() + plazo);
+                try {
+                    // Guardar valores originales para comparar
+                    const valoresOriginales = { ...prestamo };
+                    
+                    // Obtener nuevos valores
+                    const fechaPrestamo = document.getElementById('editFechaPrestamo').value;
+                    const nombreEmpresa = document.getElementById('editNombreEmpresa').value;
+                    const monto = parseFloat(document.getElementById('editMonto').value);
+                    const plazo = parseInt(document.getElementById('editPlazoMeses').value);
+                    const tasa = parseFloat(document.getElementById('editTasaInteres').value);
+                    const modalidad = document.getElementById('editModalidadPago').value;
+                    const observaciones = document.getElementById('editObservaciones').value;
 
-                const interes = monto * (tasa / 100);
-                const montoTotal = monto + interes;
-                const cuotaMensual = montoTotal / plazo;
+                    // Recalcular valores
+                    const fechaInicioObj = new Date(fechaPrestamo);
+                    const fechaVencimiento = new Date(fechaInicioObj);
+                    fechaVencimiento.setMonth(fechaVencimiento.getMonth() + plazo);
 
-                // Actualizar el préstamo
-                prestamo.fechaPrestamo = fechaPrestamo;
-                prestamo.nombreEmpresa = nombreEmpresa;
-                prestamo.monto = monto;
-                prestamo.plazoMeses = plazo;
-                prestamo.tasaInteres = tasa;
-                prestamo.modalidadPago = modalidad;
-                prestamo.fechaVencimiento = fechaVencimiento.toISOString().split('T')[0];
-                prestamo.interesTotal = interes;
-                prestamo.montoTotal = montoTotal;
-                prestamo.cuotaMensual = cuotaMensual;
-                prestamo.observaciones = observaciones;
-                prestamo.fechaModificacion = new Date().toISOString();
+                    const interes = monto * (tasa / 100);
+                    const montoTotal = monto + interes;
+                    const cuotaMensual = montoTotal / plazo;
 
-                // Si cambió la modalidad de pago, recrear cuotas
-                if (modalidad === 'cuotas' && (!prestamo.cuotas || valoresOriginales.modalidadPago !== 'cuotas')) {
-                    prestamo.cuotas = crearCronogramaCuotas(prestamo);
-                } else if (modalidad === 'vencimiento') {
-                    delete prestamo.cuotas;
+                    // Actualizar el préstamo
+                    prestamo.fechaPrestamo = fechaPrestamo;
+                    prestamo.nombreEmpresa = nombreEmpresa;
+                    prestamo.monto = monto;
+                    prestamo.plazoMeses = plazo;
+                    prestamo.tasaInteres = tasa;
+                    prestamo.modalidadPago = modalidad;
+                    prestamo.fechaVencimiento = fechaVencimiento.toISOString().split('T')[0];
+                    prestamo.interesTotal = interes;
+                    prestamo.montoTotal = montoTotal;
+                    prestamo.cuotaMensual = cuotaMensual;
+                    prestamo.observaciones = observaciones;
+                    prestamo.fechaModificacion = new Date().toISOString();
+
+                    // Si cambió la modalidad de pago, recrear cuotas
+                    if (modalidad === 'cuotas' && (!prestamo.cuotas || valoresOriginales.modalidadPago !== 'cuotas')) {
+                        prestamo.cuotas = crearCronogramaCuotas(prestamo);
+                    } else if (modalidad === 'vencimiento') {
+                        delete prestamo.cuotas;
+                    }
+
+                    // Intentar guardar en GitHub
+                    await guardarDatosGitHub();
+                    cerrarModalEditar();
+                    actualizarTodo();
+                    
+                    mostrarNotificacion(`✅ Préstamo #${prestamo.numeroPrestamo} de ${nombreEmpresa} actualizado exitosamente`, 'success');
+
+                } catch (error) {
+                    console.error('Error al actualizar préstamo:', error);
+                    mostrarNotificacion('❌ Error al actualizar préstamo: ' + error.message, 'error');
+                } finally {
+                    // Restaurar botón
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
-
-                await guardarDatosGitHub();
-                cerrarModalEditar();
-                actualizarTodo();
-                
-                mostrarNotificacion(`Préstamo #${prestamo.numeroPrestamo} de ${nombreEmpresa} actualizado exitosamente`, 'success');
             }
         }
 
