@@ -1,5 +1,38 @@
 [
   {
+    "id": 1753987350647,
+    "numeroPrestamo": 8,
+    "fechaPrestamo": "2025-06-08",
+    "nombreEmpresa": "Eden Blanco",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-08-08",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T18:42:30.647Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-07-08",
+        "monto": 300000,
+        "estado": "pagada",
+        "fechaPago": "2025-07-31"
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-08-08",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753987301285,
     "numeroPrestamo": 7,
     "fechaPrestamo": "2025-06-27",
@@ -254,39 +287,6 @@
       {
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ]
-  },
-  {
-    "id": 1753987350647,
-    "numeroPrestamo": 8,
-    "fechaPrestamo": "2025-06-08",
-    "nombreEmpresa": "Eden Blanco",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-08-08",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "activo",
-    "fechaCreacion": "2025-07-31T18:42:30.647Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-07-08",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-08-08",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
