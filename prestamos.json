@@ -1,5 +1,38 @@
 [
   {
+    "id": 1753990193352,
+    "numeroPrestamo": 19,
+    "fechaPrestamo": "2025-07-30",
+    "nombreEmpresa": "Alejandro Carballo",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-30",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T19:29:53.352Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-08-30",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-09-30",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753989443702,
     "numeroPrestamo": 18,
     "fechaPrestamo": "2025-05-07",
@@ -205,8 +238,8 @@
         "numero": 2,
         "fechaVencimiento": "2025-08-27",
         "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
+        "estado": "pendiente",
+        "fechaPago": null
       },
       {
         "numero": 3,
@@ -678,39 +711,6 @@
       {
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ]
-  },
-  {
-    "id": 1753990193352,
-    "numeroPrestamo": 19,
-    "fechaPrestamo": "2025-07-30",
-    "nombreEmpresa": "Alejandro Carballo",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-30",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "activo",
-    "fechaCreacion": "2025-07-31T19:29:53.352Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-08-30",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-09-30",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
