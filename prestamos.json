@@ -1,5 +1,38 @@
 [
   {
+    "id": 1753987048350,
+    "numeroPrestamo": 6,
+    "fechaPrestamo": "2025-07-22",
+    "nombreEmpresa": "Zorrilla",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-22",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-07-31T18:37:28.350Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-08-22",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-09-22",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753985252055,
     "numeroPrestamo": 5,
     "fechaPrestamo": "2025-07-22",
@@ -195,32 +228,32 @@
     ]
   },
   {
-    "id": 1753987048350,
-    "numeroPrestamo": 6,
-    "fechaPrestamo": "2025-07-22",
-    "nombreEmpresa": "Zorrilla",
+    "id": 1753987301285,
+    "numeroPrestamo": 7,
+    "fechaPrestamo": "2025-06-27",
+    "nombreEmpresa": "Carlos Denis",
     "monto": 500000,
     "plazoMeses": 2,
     "tasaInteres": 20,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-22",
+    "fechaVencimiento": "2025-08-27",
     "interesTotal": 100000,
     "montoTotal": 600000,
     "cuotaMensual": 300000,
-    "observaciones": "",
+    "observaciones": "Se le dio el 27-05-25 no se porque se le cobro recien el 05-07-25",
     "estado": "activo",
-    "fechaCreacion": "2025-07-31T18:37:28.350Z",
+    "fechaCreacion": "2025-07-31T18:41:41.285Z",
     "cuotas": [
       {
         "numero": 1,
-        "fechaVencimiento": "2025-08-22",
+        "fechaVencimiento": "2025-07-27",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
       },
       {
         "numero": 2,
-        "fechaVencimiento": "2025-09-22",
+        "fechaVencimiento": "2025-08-27",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
