@@ -242,13 +242,19 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1000px;
+            min-width: 1200px;
         }
 
         th, td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        th:nth-child(9), td:nth-child(9) {
+            max-width: 200px;
+            word-wrap: break-word;
         }
 
         th {
@@ -616,7 +622,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="monto">Monto (₲):</label>
-                                <input type="number" id="monto" step="100000" placeholder="5000000" required>
+                                <input type="number" id="monto" step="1000" placeholder="1575000" required>
                             </div>
                             <div class="form-group">
                                 <label for="plazoMeses">Plazo (meses):</label>
@@ -707,8 +713,9 @@
                             <th>Monto</th>
                             <th>Plazo</th>
                             <th>Estado</th>
-                            <th>Progreso de Cuotas</th>
+                            <th>Progreso</th>
                             <th>Total a Recibir</th>
+                            <th>Observaciones</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -1380,11 +1387,20 @@
                         <div>${formatearFecha(prestamo.fechaPrestamo)}</div>
                         <div style="font-size: 11px; color: #666;">₲ ${prestamo.monto.toLocaleString('es-PY')}</div>
                     </td>
-                    <td>${prestamo.plazoMeses} meses</td>
-                    <td>${prestamo.tasaInteres}%</td>
+                    <td>${prestamo.plazoMeses} meses<br><small>${prestamo.tasaInteres}%</small></td>
                     <td><span class="status-badge ${estadoClass}">${estadoTexto}</span></td>
                     <td>${progresoCuotas}</td>
                     <td style="color: #10b981; font-weight: bold;">₲ ${prestamo.montoTotal.toLocaleString('es-PY')}</td>
+                    <td>
+                        <div style="max-width: 200px; font-size: 12px; color: #666;">
+                            ${prestamo.observaciones ? 
+                                `<span title="${prestamo.observaciones}">${prestamo.observaciones.length > 50 ? 
+                                    prestamo.observaciones.substring(0, 50) + '...' : 
+                                    prestamo.observaciones}</span>` : 
+                                '<span style="color: #ccc;">Sin observaciones</span>'
+                            }
+                        </div>
+                    </td>
                     <td class="actions">
                         ${prestamo.cuotas ? `<button class="btn-small btn-success" onclick="abrirModalCuotas(${prestamo.id})">📅</button>` : ''}
                         <button class="btn-small btn-warning" onclick="marcarPagado(${prestamo.id})">✅</button>
@@ -1444,6 +1460,7 @@
                                 Total Prestado: ₲ ${cliente.totalPrestado.toLocaleString('es-PY')}<br>
                                 Total a Recibir: ₲ ${cliente.totalRecibir.toLocaleString('es-PY')}<br>
                                 Último: #${ultimoPrestamo.numeroPrestamo} - ${formatearFecha(ultimoPrestamo.fechaPrestamo)}
+                                ${ultimoPrestamo.observaciones ? `<br><em>"${ultimoPrestamo.observaciones.length > 40 ? ultimoPrestamo.observaciones.substring(0, 40) + '...' : ultimoPrestamo.observaciones}"</em>` : ''}
                             </div>
                         </div>
                     `;
@@ -1466,7 +1483,8 @@
                 <strong>Cliente:</strong> ${prestamo.nombreEmpresa}<br>
                 <strong>Monto:</strong> ₲ ${prestamo.monto.toLocaleString('es-PY')} | 
                 <strong>Total:</strong> ₲ ${prestamo.montoTotal.toLocaleString('es-PY')}<br>
-                <strong>Cuota:</strong> ₲ ${prestamo.cuotaMensual.toLocaleString('es-PY')}
+                <strong>Cuota:</strong> ₲ ${prestamo.cuotaMensual.toLocaleString('es-PY')}<br>
+                ${prestamo.observaciones ? `<strong>Observaciones:</strong> ${prestamo.observaciones}` : '<em>Sin observaciones</em>'}
             `;
 
             actualizarModalCuotas(prestamo);
