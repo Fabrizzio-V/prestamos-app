@@ -27,8 +27,8 @@
         "numero": 2,
         "fechaVencimiento": "2025-07-07",
         "monto": 300000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-07-31"
       },
       {
         "numero": 3,
@@ -44,7 +44,8 @@
         "estado": "pendiente",
         "fechaPago": null
       }
-    ]
+    ],
+    "fechaModificacion": "2025-07-31T19:17:40.508Z"
   },
   {
     "id": 1753989401080,
