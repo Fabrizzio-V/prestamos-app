@@ -33,6 +33,46 @@
     ]
   },
   {
+    "id": 1754428109660,
+    "numeroPrestamo": 19,
+    "fechaPrestamo": "2025-07-06",
+    "nombreEmpresa": "Virilo Rolon",
+    "monto": 900000,
+    "plazoMeses": 3,
+    "tasaInteres": 0,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-10-06",
+    "interesTotal": 0,
+    "montoTotal": 900000,
+    "cuotaMensual": 300000,
+    "observaciones": "Tenia saldo de 300 julio",
+    "estado": "activo",
+    "fechaCreacion": "2025-08-05T21:08:29.661Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-08-06",
+        "monto": 300000,
+        "estado": "pagada",
+        "fechaPago": "2025-08-05"
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-09-06",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2025-10-06",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753989443702,
     "numeroPrestamo": 18,
     "fechaPrestamo": "2025-05-07",
@@ -685,46 +725,6 @@
       {
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ]
-  },
-  {
-    "id": 1754428109660,
-    "numeroPrestamo": 19,
-    "fechaPrestamo": "2025-07-06",
-    "nombreEmpresa": "Virilo Rolon",
-    "monto": 900000,
-    "plazoMeses": 3,
-    "tasaInteres": 0,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-06",
-    "interesTotal": 0,
-    "montoTotal": 900000,
-    "cuotaMensual": 300000,
-    "observaciones": "Tenia saldo de 300 julio",
-    "estado": "activo",
-    "fechaCreacion": "2025-08-05T21:08:29.661Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-08-06",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-09-06",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-10-06",
         "monto": 300000,
         "estado": "pendiente",
         "fechaPago": null
