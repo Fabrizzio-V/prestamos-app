@@ -598,7 +598,7 @@
     "montoTotal": 900000,
     "cuotaMensual": 300000,
     "observaciones": "Tenia saldo de 300 Julio y renovo ",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-07-30T11:55:16.726Z",
     "numeroPrestamo": 4,
     "cuotas": [
@@ -613,11 +613,11 @@
         "numero": 2,
         "fechaVencimiento": "2025-09-06",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-08-05"
       }
     ],
-    "fechaPago": null,
+    "fechaPago": "2025-08-05",
     "fechaModificacion": "2025-08-05T21:07:20.910Z"
   },
   {
