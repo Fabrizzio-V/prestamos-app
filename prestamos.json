@@ -586,41 +586,6 @@
     "fechaModificacion": "2025-07-31T18:36:15.779Z"
   },
   {
-    "id": 1753876516726,
-    "fechaPrestamo": "2025-07-06",
-    "nombreEmpresa": "Virilo Rolon",
-    "monto": 900000,
-    "plazoMeses": 3,
-    "tasaInteres": 0,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-06",
-    "interesTotal": 0,
-    "montoTotal": 900000,
-    "cuotaMensual": 300000,
-    "observaciones": "Tenia saldo de 300 Julio y renovo ",
-    "estado": "activo",
-    "fechaCreacion": "2025-07-30T11:55:16.726Z",
-    "numeroPrestamo": 4,
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-08-06",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-09-06",
-        "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ],
-    "fechaPago": null,
-    "fechaModificacion": "2025-08-05T21:07:20.910Z"
-  },
-  {
     "id": 1753907420426,
     "fechaPrestamo": "2025-07-30",
     "nombreEmpresa": "Francisco cabral",
