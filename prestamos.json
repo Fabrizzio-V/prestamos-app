@@ -589,15 +589,15 @@
     "id": 1753876516726,
     "fechaPrestamo": "2025-07-06",
     "nombreEmpresa": "Virilo Rolon",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
+    "monto": 900000,
+    "plazoMeses": 3,
+    "tasaInteres": 0,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-06",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
+    "fechaVencimiento": "2025-10-06",
+    "interesTotal": 0,
+    "montoTotal": 900000,
     "cuotaMensual": 300000,
-    "observaciones": "",
+    "observaciones": "Tenia saldo de 300 Julio y renovo ",
     "estado": "activo",
     "fechaCreacion": "2025-07-30T11:55:16.726Z",
     "numeroPrestamo": 4,
@@ -617,7 +617,8 @@
         "fechaPago": null
       }
     ],
-    "fechaPago": null
+    "fechaPago": null,
+    "fechaModificacion": "2025-08-05T21:06:58.396Z"
   },
   {
     "id": 1753907420426,
