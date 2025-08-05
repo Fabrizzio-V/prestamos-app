@@ -1,5 +1,52 @@
 [
   {
+    "id": 1754428179376,
+    "numeroPrestamo": 20,
+    "fechaPrestamo": "2025-05-22",
+    "nombreEmpresa": "Javier alvarez",
+    "monto": 2000000,
+    "plazoMeses": 4,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-09-22",
+    "interesTotal": 400000,
+    "montoTotal": 2400000,
+    "cuotaMensual": 600000,
+    "observaciones": "",
+    "estado": "activo",
+    "fechaCreacion": "2025-08-05T21:09:39.376Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-06-22",
+        "monto": 600000,
+        "estado": "pagada",
+        "fechaPago": "2025-08-05"
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-07-22",
+        "monto": 600000,
+        "estado": "vencida",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2025-08-22",
+        "monto": 600000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 4,
+        "fechaVencimiento": "2025-09-22",
+        "monto": 600000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1753990193352,
     "numeroPrestamo": 19,
     "fechaPrestamo": "2025-07-30",
@@ -726,53 +773,6 @@
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
-      }
-    ]
-  },
-  {
-    "id": 1754428179376,
-    "numeroPrestamo": 20,
-    "fechaPrestamo": "2025-05-22",
-    "nombreEmpresa": "Javier alvarez",
-    "monto": 2000000,
-    "plazoMeses": 4,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-22",
-    "interesTotal": 400000,
-    "montoTotal": 2400000,
-    "cuotaMensual": 600000,
-    "observaciones": "",
-    "estado": "activo",
-    "fechaCreacion": "2025-08-05T21:09:39.376Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-06-22",
-        "monto": 600000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-07-22",
-        "monto": 600000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-08-22",
-        "monto": 600000,
-        "estado": "pendiente",
-        "fechaPago": null
-      },
-      {
-        "numero": 4,
-        "fechaVencimiento": "2025-09-22",
-        "monto": 600000,
         "estado": "pendiente",
         "fechaPago": null
       }
