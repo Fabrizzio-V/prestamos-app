@@ -1,5 +1,38 @@
 [
   {
+    "id": 1755113860681,
+    "numeroPrestamo": 22,
+    "fechaPrestamo": "2025-08-12",
+    "nombreEmpresa": "Rolando Villalba",
+    "monto": 500000,
+    "plazoMeses": 2,
+    "tasaInteres": 20,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2025-10-12",
+    "interesTotal": 100000,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "Para que no se vaya ",
+    "estado": "activo",
+    "fechaCreacion": "2025-08-13T19:37:40.681Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-09-12",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2025-10-12",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
+  },
+  {
     "id": 1754597161253,
     "numeroPrestamo": 21,
     "fechaPrestamo": "2025-08-07",
@@ -826,33 +859,47 @@
     ]
   },
   {
-    "id": 1755113860681,
-    "numeroPrestamo": 22,
-    "fechaPrestamo": "2025-08-12",
-    "nombreEmpresa": "Rolando Villalba",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
+    "id": 1755197842201,
+    "numeroPrestamo": 23,
+    "fechaPrestamo": "2025-08-13",
+    "nombreEmpresa": "Lucia Galeano",
+    "monto": 1436000,
+    "plazoMeses": 4,
+    "tasaInteres": 0,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-12",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "Para que no se vaya ",
+    "fechaVencimiento": "2025-12-13",
+    "interesTotal": 0,
+    "montoTotal": 1436000,
+    "cuotaMensual": 359000,
+    "observaciones": "CELULAR",
     "estado": "activo",
-    "fechaCreacion": "2025-08-13T19:37:40.681Z",
+    "fechaCreacion": "2025-08-14T18:57:22.201Z",
     "cuotas": [
       {
         "numero": 1,
-        "fechaVencimiento": "2025-09-12",
-        "monto": 300000,
+        "fechaVencimiento": "2025-09-13",
+        "monto": 359000,
         "estado": "pendiente",
         "fechaPago": null
       },
       {
         "numero": 2,
-        "fechaVencimiento": "2025-10-12",
-        "monto": 300000,
+        "fechaVencimiento": "2025-10-13",
+        "monto": 359000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2025-11-13",
+        "monto": 359000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 4,
+        "fechaVencimiento": "2025-12-13",
+        "monto": 359000,
         "estado": "pendiente",
         "fechaPago": null
       }
