@@ -883,7 +883,7 @@
     "montoTotal": 600000,
     "cuotaMensual": 300000,
     "observaciones": "Igual se le debita el 5 de agosto ",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-07-30T20:30:41.296Z",
     "numeroPrestamo": 2,
     "cuotas": [
@@ -898,10 +898,11 @@
         "numero": 2,
         "fechaVencimiento": "2025-09-30",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-09-04"
       }
-    ]
+    ],
+    "fechaPago": "2025-09-04"
   },
   {
     "id": 1753967556811,
