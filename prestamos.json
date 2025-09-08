@@ -53,8 +53,8 @@
         "numero": 1,
         "fechaVencimiento": "2025-09-13",
         "monto": 359000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-09-08"
       },
       {
         "numero": 2,
