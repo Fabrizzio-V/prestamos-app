@@ -256,7 +256,7 @@
     "montoTotal": 900000,
     "cuotaMensual": 300000,
     "observaciones": "Tenia saldo de 300 julio",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-08-05T21:08:29.661Z",
     "cuotas": [
       {
@@ -277,10 +277,11 @@
         "numero": 3,
         "fechaVencimiento": "2025-10-06",
         "monto": 300000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-10-06"
       }
-    ]
+    ],
+    "fechaPago": "2025-10-06"
   },
   {
     "id": 1753989443702,
