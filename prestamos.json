@@ -60,8 +60,8 @@
         "numero": 2,
         "fechaVencimiento": "2025-10-13",
         "monto": 359000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-10-06"
       },
       {
         "numero": 3,
@@ -275,7 +275,7 @@
         "numero": 3,
         "fechaVencimiento": "2025-10-06",
         "monto": 300000,
-        "estado": "pendiente",
+        "estado": "vencida",
         "fechaPago": null
       }
     ]
