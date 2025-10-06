@@ -919,7 +919,7 @@
     "montoTotal": 900000,
     "cuotaMensual": 300000,
     "observaciones": "Tenia un saldo de 300 en junio y en julio solicito 500 mas",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-07-31T13:12:36.811Z",
     "numeroPrestamo": 1,
     "cuotas": [
@@ -941,9 +941,10 @@
         "numero": 3,
         "fechaVencimiento": "2025-10-07",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-10-06"
       }
-    ]
+    ],
+    "fechaPago": "2025-10-06"
   }
 ]
