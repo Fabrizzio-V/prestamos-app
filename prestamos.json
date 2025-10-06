@@ -13,7 +13,7 @@
     "montoTotal": 600000,
     "cuotaMensual": 300000,
     "observaciones": "Se tiene que cobrar en efectivo o transferencia con Morel",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-08-23T14:40:08.402Z",
     "cuotas": [
       {
@@ -27,10 +27,11 @@
         "numero": 2,
         "fechaVencimiento": "2025-10-23",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-10-06"
       }
-    ]
+    ],
+    "fechaPago": "2025-10-06"
   },
   {
     "id": 1755197842201,
