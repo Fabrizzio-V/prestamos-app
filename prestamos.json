@@ -477,7 +477,7 @@
     "montoTotal": 1200000,
     "cuotaMensual": 300000,
     "observaciones": "",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-07-31T18:46:43.196Z",
     "cuotas": [
       {
@@ -505,11 +505,12 @@
         "numero": 4,
         "fechaVencimiento": "2025-10-27",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-10-06"
       }
     ],
-    "fechaModificacion": "2025-07-31T19:35:08.377Z"
+    "fechaModificacion": "2025-07-31T19:35:08.377Z",
+    "fechaPago": "2025-10-06"
   },
   {
     "id": 1753987537253,
