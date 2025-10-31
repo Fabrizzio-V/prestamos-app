@@ -2,13 +2,13 @@
   {
     "id": 1761934607798,
     "numeroPrestamo": 25,
-    "fechaPrestamo": "2025-11-05",
+    "fechaPrestamo": "2025-10-31",
     "nombreEmpresa": "Garcete",
     "monto": 600000,
     "plazoMeses": 2,
     "tasaInteres": 0,
     "modalidadPago": "cuotas",
-    "fechaVencimiento": "2026-01-05",
+    "fechaVencimiento": "2025-12-31",
     "interesTotal": 0,
     "montoTotal": 600000,
     "cuotaMensual": 300000,
@@ -31,7 +31,7 @@
         "fechaPago": null
       }
     ],
-    "fechaModificacion": "2025-10-31T18:17:24.966Z"
+    "fechaModificacion": "2025-10-31T18:17:49.687Z"
   },
   {
     "id": 1755960008402,
