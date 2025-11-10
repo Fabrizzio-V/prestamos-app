@@ -983,5 +983,52 @@
       }
     ],
     "fechaPago": "2025-10-06"
+  },
+  {
+    "id": 1762802894989,
+    "numeroPrestamo": 26,
+    "fechaPrestamo": "2025-11-10",
+    "nombreEmpresa": "pablo arguello",
+    "monto": 1200000,
+    "plazoMeses": 4,
+    "tasaInteres": 0,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2026-03-10",
+    "interesTotal": 0,
+    "montoTotal": 1200000,
+    "cuotaMensual": 300000,
+    "observaciones": "Se le dio 10 de noviembre, 4 cuotas de 300 mil que se cobrara apartir del 5 de diciembre ",
+    "estado": "activo",
+    "fechaCreacion": "2025-11-10T19:28:14.989Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2025-12-10",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2026-01-10",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 3,
+        "fechaVencimiento": "2026-02-10",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 4,
+        "fechaVencimiento": "2026-03-10",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
   }
 ]
