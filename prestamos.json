@@ -183,8 +183,8 @@
         "numero": 3,
         "fechaVencimiento": "2025-11-07",
         "monto": 600000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2025-11-10"
       },
       {
         "numero": 4,
