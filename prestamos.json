@@ -20,14 +20,14 @@
         "numero": 1,
         "fechaVencimiento": "2025-12-10",
         "monto": 300000,
-        "estado": "pendiente",
+        "estado": "vencida",
         "fechaPago": null
       },
       {
         "numero": 2,
         "fechaVencimiento": "2026-01-10",
         "monto": 300000,
-        "estado": "pendiente",
+        "estado": "vencida",
         "fechaPago": null
       },
       {
@@ -60,25 +60,26 @@
     "montoTotal": 600000,
     "cuotaMensual": 300000,
     "observaciones": "primera cuota en diciembre y segunda cuota liquida ENERO, paga en efectivo los 5",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-10-31T18:16:47.798Z",
     "cuotas": [
       {
         "numero": 1,
         "fechaVencimiento": "2025-12-01",
         "monto": 300000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2026-01-21"
       },
       {
         "numero": 2,
         "fechaVencimiento": "2025-12-31",
         "monto": 300000,
-        "estado": "pendiente",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2026-01-21"
       }
     ],
-    "fechaModificacion": "2025-10-31T18:17:49.687Z"
+    "fechaModificacion": "2025-10-31T18:17:49.687Z",
+    "fechaPago": "2026-01-21"
   },
   {
     "id": 1755960008402,
@@ -156,7 +157,7 @@
         "numero": 4,
         "fechaVencimiento": "2025-12-13",
         "monto": 359000,
-        "estado": "pendiente",
+        "estado": "vencida",
         "fechaPago": null
       }
     ]
@@ -917,7 +918,7 @@
         "numero": 5,
         "fechaVencimiento": "2025-12-22",
         "monto": 300000,
-        "estado": "pendiente",
+        "estado": "vencida",
         "fechaPago": null
       }
     ],
