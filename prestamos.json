@@ -47,40 +47,6 @@
     ]
   },
   {
-    "id": 1755960008402,
-    "numeroPrestamo": 24,
-    "fechaPrestamo": "2025-08-23",
-    "nombreEmpresa": "Denis carlos",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-23",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "Se tiene que cobrar en efectivo o transferencia con Morel",
-    "estado": "pagado",
-    "fechaCreacion": "2025-08-23T14:40:08.402Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-09-23",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-09-08"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-10-23",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-10-06"
-      }
-    ],
-    "fechaPago": "2025-10-06"
-  },
-  {
     "id": 1755197842201,
     "numeroPrestamo": 23,
     "fechaPrestamo": "2025-08-13",
