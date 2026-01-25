@@ -47,55 +47,6 @@
     ]
   },
   {
-    "id": 1753989443702,
-    "numeroPrestamo": 18,
-    "fechaPrestamo": "2025-05-07",
-    "nombreEmpresa": "Tomas Rojas",
-    "monto": 1000000,
-    "plazoMeses": 4,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-07",
-    "interesTotal": 200000,
-    "montoTotal": 1200000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "pagado",
-    "fechaCreacion": "2025-07-31T19:17:23.702Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-06-07",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-07-07",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-08-07",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      },
-      {
-        "numero": 4,
-        "fechaVencimiento": "2025-09-07",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-09-04"
-      }
-    ],
-    "fechaModificacion": "2025-07-31T19:17:40.508Z",
-    "fechaPago": "2025-09-04"
-  },
-  {
     "id": 1753989401080,
     "numeroPrestamo": 17,
     "fechaPrestamo": "2025-04-23",
