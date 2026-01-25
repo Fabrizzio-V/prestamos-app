@@ -102,40 +102,6 @@
     "fechaModificacion": "2025-09-03T15:11:44.940Z"
   },
   {
-    "id": 1753907441296,
-    "fechaPrestamo": "2025-07-30",
-    "nombreEmpresa": "Carlos centurión ",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-09-30",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "Igual se le debita el 5 de agosto ",
-    "estado": "pagado",
-    "fechaCreacion": "2025-07-30T20:30:41.296Z",
-    "numeroPrestamo": 2,
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-08-30",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-09-30",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-09-04"
-      }
-    ],
-    "fechaPago": "2025-09-04"
-  },
-  {
     "id": 1753967556811,
     "fechaPrestamo": "2025-07-07",
     "nombreEmpresa": "Garcete",
