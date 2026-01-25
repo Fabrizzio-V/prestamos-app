@@ -129,7 +129,7 @@
     "montoTotal": 1436000,
     "cuotaMensual": 359000,
     "observaciones": "CELULAR",
-    "estado": "activo",
+    "estado": "pagado",
     "fechaCreacion": "2025-08-14T18:57:22.201Z",
     "cuotas": [
       {
@@ -157,10 +157,11 @@
         "numero": 4,
         "fechaVencimiento": "2025-12-13",
         "monto": 359000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2026-01-25"
       }
-    ]
+    ],
+    "fechaPago": "2026-01-25"
   },
   {
     "id": 1755113860681,
