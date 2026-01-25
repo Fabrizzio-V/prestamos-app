@@ -45,5 +45,38 @@
         "fechaPago": null
       }
     ]
+  },
+  {
+    "id": 1769348542077,
+    "numeroPrestamo": 2,
+    "fechaPrestamo": "2026-01-25",
+    "nombreEmpresa": "javier alvarez",
+    "monto": 600000,
+    "plazoMeses": 2,
+    "tasaInteres": 0,
+    "modalidadPago": "cuotas",
+    "fechaVencimiento": "2026-03-25",
+    "interesTotal": 0,
+    "montoTotal": 600000,
+    "cuotaMensual": 300000,
+    "observaciones": "se le da en enero 25, se le cobra el 31 de enero 300 mil y el proximo en febrero 31",
+    "estado": "activo",
+    "fechaCreacion": "2026-01-25T13:42:22.077Z",
+    "cuotas": [
+      {
+        "numero": 1,
+        "fechaVencimiento": "2026-02-25",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      },
+      {
+        "numero": 2,
+        "fechaVencimiento": "2026-03-25",
+        "monto": 300000,
+        "estado": "pendiente",
+        "fechaPago": null
+      }
+    ]
   }
 ]
