@@ -47,40 +47,6 @@
     ]
   },
   {
-    "id": 1753987537253,
-    "numeroPrestamo": 13,
-    "fechaPrestamo": "2025-06-17",
-    "nombreEmpresa": "Pedro Acosta",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-08-17",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "pagado",
-    "fechaCreacion": "2025-07-31T18:45:37.253Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-07-17",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-08-17",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      }
-    ],
-    "fechaPago": "2025-08-05"
-  },
-  {
     "id": 1753987505083,
     "numeroPrestamo": 12,
     "fechaPrestamo": "2025-06-17",
