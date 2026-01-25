@@ -47,41 +47,6 @@
     ]
   },
   {
-    "id": 1761934607798,
-    "numeroPrestamo": 25,
-    "fechaPrestamo": "2025-10-31",
-    "nombreEmpresa": "Garcete",
-    "monto": 600000,
-    "plazoMeses": 2,
-    "tasaInteres": 0,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-12-31",
-    "interesTotal": 0,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "primera cuota en diciembre y segunda cuota liquida ENERO, paga en efectivo los 5",
-    "estado": "pagado",
-    "fechaCreacion": "2025-10-31T18:16:47.798Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-12-01",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2026-01-21"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-12-31",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2026-01-21"
-      }
-    ],
-    "fechaModificacion": "2025-10-31T18:17:49.687Z",
-    "fechaPago": "2026-01-21"
-  },
-  {
     "id": 1755960008402,
     "numeroPrestamo": 24,
     "fechaPrestamo": "2025-08-23",
