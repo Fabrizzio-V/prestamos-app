@@ -47,54 +47,6 @@
     ]
   },
   {
-    "id": 1754597161253,
-    "numeroPrestamo": 21,
-    "fechaPrestamo": "2025-08-07",
-    "nombreEmpresa": "Andrea Alvarez (Hija Javier)",
-    "monto": 2000000,
-    "plazoMeses": 4,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-12-07",
-    "interesTotal": 400000,
-    "montoTotal": 2400000,
-    "cuotaMensual": 600000,
-    "observaciones": "",
-    "estado": "pagado",
-    "fechaCreacion": "2025-08-07T20:06:01.253Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-09-07",
-        "monto": 600000,
-        "estado": "pagada",
-        "fechaPago": "2025-12-03"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-10-07",
-        "monto": 600000,
-        "estado": "pagada",
-        "fechaPago": "2025-12-03"
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-11-07",
-        "monto": 600000,
-        "estado": "pagada",
-        "fechaPago": "2025-12-03"
-      },
-      {
-        "numero": 4,
-        "fechaVencimiento": "2025-12-07",
-        "monto": 600000,
-        "estado": "pagada",
-        "fechaPago": "2025-12-03"
-      }
-    ],
-    "fechaPago": "2025-12-03"
-  },
-  {
     "id": 1754428179376,
     "numeroPrestamo": 20,
     "fechaPrestamo": "2025-05-22",
