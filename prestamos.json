@@ -47,40 +47,6 @@
     ]
   },
   {
-    "id": 1755113860681,
-    "numeroPrestamo": 22,
-    "fechaPrestamo": "2025-08-12",
-    "nombreEmpresa": "Rolando Villalba",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-10-12",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "Para que no se vaya ",
-    "estado": "pagado",
-    "fechaCreacion": "2025-08-13T19:37:40.681Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-09-12",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-09-04"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-10-12",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-10-06"
-      }
-    ],
-    "fechaPago": "2025-10-06"
-  },
-  {
     "id": 1754597161253,
     "numeroPrestamo": 21,
     "fechaPrestamo": "2025-08-07",
