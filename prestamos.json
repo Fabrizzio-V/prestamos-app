@@ -47,40 +47,6 @@
     ]
   },
   {
-    "id": 1753987473032,
-    "numeroPrestamo": 11,
-    "fechaPrestamo": "2025-06-14",
-    "nombreEmpresa": "Lidia Ocampos",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-08-14",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "pagado",
-    "fechaCreacion": "2025-07-31T18:44:33.032Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-07-14",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-08-14",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      }
-    ],
-    "fechaPago": "2025-08-05"
-  },
-  {
     "id": 1753987424381,
     "numeroPrestamo": 10,
     "fechaPrestamo": "2025-06-12",
