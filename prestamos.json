@@ -27,8 +27,8 @@
         "numero": 2,
         "fechaVencimiento": "2026-01-10",
         "monto": 300000,
-        "estado": "vencida",
-        "fechaPago": null
+        "estado": "pagada",
+        "fechaPago": "2026-01-25"
       },
       {
         "numero": 3,
