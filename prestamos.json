@@ -47,40 +47,6 @@
     ]
   },
   {
-    "id": 1753987389493,
-    "numeroPrestamo": 9,
-    "fechaPrestamo": "2025-06-12",
-    "nombreEmpresa": "Taurino Britez",
-    "monto": 500000,
-    "plazoMeses": 2,
-    "tasaInteres": 20,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-08-12",
-    "interesTotal": 100000,
-    "montoTotal": 600000,
-    "cuotaMensual": 300000,
-    "observaciones": "",
-    "estado": "pagado",
-    "fechaCreacion": "2025-07-31T18:43:09.493Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-07-12",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-07-31"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-08-12",
-        "monto": 300000,
-        "estado": "pagada",
-        "fechaPago": "2025-08-05"
-      }
-    ],
-    "fechaPago": "2025-08-05"
-  },
-  {
     "id": 1753987350647,
     "numeroPrestamo": 8,
     "fechaPrestamo": "2025-06-08",
