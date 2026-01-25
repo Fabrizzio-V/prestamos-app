@@ -47,54 +47,6 @@
     ]
   },
   {
-    "id": 1755197842201,
-    "numeroPrestamo": 23,
-    "fechaPrestamo": "2025-08-13",
-    "nombreEmpresa": "Lucia Galeano",
-    "monto": 1436000,
-    "plazoMeses": 4,
-    "tasaInteres": 0,
-    "modalidadPago": "cuotas",
-    "fechaVencimiento": "2025-12-13",
-    "interesTotal": 0,
-    "montoTotal": 1436000,
-    "cuotaMensual": 359000,
-    "observaciones": "CELULAR",
-    "estado": "pagado",
-    "fechaCreacion": "2025-08-14T18:57:22.201Z",
-    "cuotas": [
-      {
-        "numero": 1,
-        "fechaVencimiento": "2025-09-13",
-        "monto": 359000,
-        "estado": "pagada",
-        "fechaPago": "2025-09-08"
-      },
-      {
-        "numero": 2,
-        "fechaVencimiento": "2025-10-13",
-        "monto": 359000,
-        "estado": "pagada",
-        "fechaPago": "2025-10-06"
-      },
-      {
-        "numero": 3,
-        "fechaVencimiento": "2025-11-13",
-        "monto": 359000,
-        "estado": "pagada",
-        "fechaPago": "2025-11-10"
-      },
-      {
-        "numero": 4,
-        "fechaVencimiento": "2025-12-13",
-        "monto": 359000,
-        "estado": "pagada",
-        "fechaPago": "2026-01-25"
-      }
-    ],
-    "fechaPago": "2026-01-25"
-  },
-  {
     "id": 1755113860681,
     "numeroPrestamo": 22,
     "fechaPrestamo": "2025-08-12",
